@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Management Suite | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-panel:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        .hero-glow-alt {
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        .card-icon {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .badge-new {
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-alt"></div>
+
+    <div class="container mx-auto px-6 py-12">
+        <!-- Header -->
+        <header class="text-center mb-20 animate-in fade-in slide-in-from-top-4 duration-1000">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
+                Educational <span class="gradient-text">Management Suite</span>
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                A high-performance comprehensive ecosystem for curriculum planning, tracking, and analytics.
+            </p>
+        </header>
+
+        <!-- Main Grid Area -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            
+            <!-- Academic Planner -->
+            <a href="academicyearcal.html" class="glass-panel p-8 rounded-3xl block relative overflow-hidden group">
+                <div class="card-icon group-hover:bg-blue-500/20 transition-colors">
+                    <i data-lucide="calendar" class="text-blue-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Yearly Planner</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Manage your academic calendar, curriculum milestones, and yearly objectives in one unified view.</p>
+                <div class="mt-6 flex items-center text-blue-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    <span>Explore Module</span>
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </div>
+            </a>
+
+            <!-- Actionable Progress -->
+            <a href="actionable.html" class="glass-panel p-8 rounded-3xl block relative overflow-hidden group">
+                <div class="card-icon group-hover:bg-purple-500/20 transition-colors">
+                    <i data-lucide="activity" class="text-purple-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Actionable Insights</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Real-time status tracking for high-priority educational tasks and developmental goals.</p>
+                <div class="mt-6 flex items-center text-purple-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    <span>View Progress</span>
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </div>
+            </a>
+
+            <!-- FLN Dashboard -->
+            <a href="fln.html" class="glass-panel p-8 rounded-3xl block relative overflow-hidden group">
+                <div class="card-icon group-hover:bg-emerald-500/20 transition-colors">
+                    <i data-lucide="book-open" class="text-emerald-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">FLN Dashboard</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Foundational Literacy and Numeracy metrics and intervention tracking systems.</p>
+                <div class="mt-6 flex items-center text-emerald-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    <span>Access FLN</span>
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </div>
+            </a>
+
+            <!-- Projections -->
+            <a href="projection.html" class="glass-panel p-8 rounded-3xl block relative overflow-hidden group">
+                <div class="card-icon group-hover:bg-amber-500/20 transition-colors">
+                    <i data-lucide="trending-up" class="text-amber-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Future Projections</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Advanced forecasting for student outcomes and academic growth based on current data.</p>
+                <div class="mt-6 flex items-center text-amber-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    <span>View Forecast</span>
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </div>
+            </a>
+
+            <!-- Student Development -->
+            <a href="studentdeveplplan.html" class="glass-panel p-8 rounded-3xl block relative overflow-hidden group">
+                <div class="card-icon group-hover:bg-indigo-500/20 transition-colors">
+                    <i data-lucide="users" class="text-indigo-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Student Development</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Individualized development plans and progress mapping for all student cohorts.</p>
+                <div class="mt-6 flex items-center text-indigo-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    <span>Open Plans</span>
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </div>
+            </a>
+
+            <!-- Teacher Dev -->
+            <a href="teacherdev.html" class="glass-panel p-8 rounded-3xl block relative overflow-hidden group">
+                <div class="card-icon group-hover:bg-rose-500/20 transition-colors">
+                    <i data-lucide="graduation-cap" class="text-rose-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Staff Development</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Professional growth tracking and certification management for educational staff.</p>
+                <div class="mt-6 flex items-center text-rose-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    <span>Manage Staff</span>
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </div>
+            </a>
+
+            <!-- Current Academic -->
+            <a href="planofcurrentacademic.html" class="glass-panel p-8 rounded-3xl block relative overflow-hidden group">
+                <div class="badge-new animate-pulse">LIVE</div>
+                <div class="card-icon group-hover:bg-cyan-500/20 transition-colors">
+                    <i data-lucide="clipboards" class="text-cyan-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Academic Plan</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Current semester breakdown, immediate curriculum goals, and scheduling.</p>
+                <div class="mt-6 flex items-center text-cyan-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    <span>Launch Plan</span>
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </div>
+            </a>
+
+            <!-- Reflection -->
+            <a href="reflection.html" class="glass-panel p-8 rounded-3xl block relative overflow-hidden group">
+                <div class="card-icon group-hover:bg-pink-500/20 transition-colors">
+                    <i data-lucide="brain" class="text-pink-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Academic Reflection</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Critical analysis of previous academic cycles and key pedagogical learnings.</p>
+                <div class="mt-6 flex items-center text-pink-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    <span>Review Findings</span>
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </div>
+            </a>
+
+             <!-- School Info -->
+             <a href="schoolinfo.html" class="glass-panel p-8 rounded-3xl block relative overflow-hidden group">
+                <div class="card-icon group-hover:bg-sky-500/20 transition-colors">
+                    <i data-lucide="school" class="text-sky-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Institutional Info</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Comprehensive school registry, infrastructure data, and administrative overview.</p>
+                <div class="mt-6 flex items-center text-sky-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    <span>View Data</span>
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </div>
+            </a>
+
+            <!-- Ratings -->
+            <a href="descriptionwithrating.html" class="glass-panel p-8 rounded-3xl block relative overflow-hidden group">
+                <div class="card-icon group-hover:bg-lime-500/20 transition-colors">
+                    <i data-lucide="star" class="text-lime-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Ratings & Reports</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Detailed qualitative descriptions paired with quantitative performance ratings.</p>
+                <div class="mt-6 flex items-center text-lime-400 font-semibold group-hover:translate-x-2 transition-transform">
+                    <span>Analyze Ratings</span>
+                    <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-32 pt-12 border-t border-slate-800 text-center">
+            <p class="text-slate-500 text-sm mb-4">© 2026 Educational Management Suite. All rights reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="text-slate-400 hover:text-white transition-colors">Documentation</a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors">Support</a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors">Terms of Service</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
