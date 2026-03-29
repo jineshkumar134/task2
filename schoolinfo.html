@@ -719,36 +719,57 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 16px 12px;
+            }
+
+            .header {
+                padding: 28px 20px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+                letter-spacing: 0.5px;
+            }
+
             .form-content {
-                padding: 30px 20px;
+                padding: 20px 16px;
             }
 
             .form-section, .custom-topic-section {
-                padding: 20px;
+                padding: 16px;
             }
 
             .input-group {
                 grid-template-columns: 1fr;
             }
 
+            .section-header, .custom-section-header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .section-title {
+                font-size: 15px;
+            }
+
             .button-group {
                 flex-direction: column;
+                gap: 10px;
             }
 
             .btn {
                 width: 100%;
+                padding: 14px 20px;
             }
 
             .subtopic-item {
                 flex-direction: column;
+                gap: 10px;
             }
 
             .delete-subtopic-btn {
                 width: 100%;
-            }
-
-            .custom-section-header {
-                flex-wrap: wrap;
             }
 
             .delete-section-btn {
@@ -756,16 +777,28 @@
                 margin-top: 10px;
             }
 
+            .add-new-section-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+            }
+
             .preview-content {
-                width: 95%;
-                padding: 30px 20px;
-                margin: 10% auto;
+                margin: 0 auto;
+                width: 100%;
+                max-height: 100%;
+                border-radius: 0;
+                padding: 60px 16px 24px;
             }
 
             .preview-actions {
-                position: static;
+                position: sticky;
+                top: 0;
                 justify-content: center;
                 margin-bottom: 20px;
+                background: white;
+                padding: 10px 0;
+                z-index: 10;
             }
         }
 
