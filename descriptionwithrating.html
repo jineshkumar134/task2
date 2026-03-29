@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descriptor-Based Actionable Plans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Quill Editor CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff5f0 0%, #e8f2ff 100%);
+            padding: 40px 20px;
+            color: #2c3e50;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header-subtitle {
+            font-size: 15px;
+            margin-top: 10px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-content {
+            padding: 50px;
+            background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b35 0%, #2563eb 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .descriptor-container {
+            margin-bottom: 50px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .descriptor-container:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .descriptor-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #f0f0f0;
+        }
+
+        .descriptor-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 28px;
+            margin-right: 20px;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            flex-shrink: 0;
+        }
+
+        .descriptor-title-section {
+            flex: 1;
+        }
+
+        .descriptor-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .descriptor-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .rating-scale-info {
+            background: linear-gradient(135deg, #eff6ff 0%, #fff5f0 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 5px solid #2563eb;
+        }
+
+        .rating-scale-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .rating-scale-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .rating-item {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #e8ecf0;
+        }
+
+        .rating-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 5px;
+        }
+
+        .rating-label {
+            font-size: 11px;
+            color: #64748b;
+            line-height: 1.3;
+        }
+
+        .actionable-plan-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #e8ecf0;
+        }
+
+        .actionable-plan-table thead {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+        }
+
+        .actionable-plan-table th {
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .actionable-plan-table td {
+            padding: 15px;
+            border: 1px solid #e8ecf0;
+            vertical-align: top;
+        }
+
+        .actionable-plan-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .table-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+            min-height: 80px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .table-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .table-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .table-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .rating-select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            background: white;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .rating-select:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .rating-select option {
+            padding: 10px;
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 2px solid #34d399;
+            color: #065f46;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(52, 211, 153, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px solid #e8ecf0;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-reset {
+            background: white;
+            color: #4a5568;
+            border: 2px solid #e8ecf0;
+        }
+
+        .btn-reset:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        .preview-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .preview-content {
+            position: relative;
+            background: white;
+            margin: 2% auto;
+            padding: 50px;
+            width: 95%;
+            max-width: 1600px;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+
+        .preview-actions {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .close-preview {
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .floating-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ff6b35 0%, #2563eb 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            font-size: 14px;
+            display: none;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .header, .button-group, .floating-indicator, .preview-actions { display: none !important; }
+            .container { box-shadow: none; }
+            .descriptor-container { page-break-inside: avoid; margin-bottom: 30px; }
+        }
+
+        @media (max-width: 768px) {
+            .form-content { padding: 30px 20px; }
+            .descriptor-container { padding: 25px; }
+            .button-group { flex-direction: column; }
+            .btn { width: 100%; }
+            .rating-scale-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 DESCRIPTOR-BASED ACTIONABLE PLANS</h1>
+            <p class="header-subtitle">5-Step Framework with Rating Scale Assessment for Pedagogical Leadership</p>
+        </div>
+
+        <div class="form-content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                ✓ Descriptor-based actionable plans saved successfully!
+            </div>
+
+            <form id="descriptorForm">
+                
+                <!-- DESCRIPTOR 1 -->
+                <div class="descriptor-container">
+                    <div class="descriptor-header">
+                        <div class="descriptor-number">1</div>
+                        <div class="descriptor-title-section">
+                            <div class="descriptor-title">Engaging in Teachers' Professional Development</div>
+                            <div class="descriptor-subtitle">Building capacity through collaborative practices and continuous learning</div>
+                        </div>
+                    </div>
+
+                    <div class="rating-scale-info">
+                        <div class="rating-scale-title">⭐ Rating Scale Guide (Assess Current Status)</div>
+                        <div class="rating-scale-grid">
+                            <div class="rating-item">
+                                <div class="rating-number">1</div>
+                                <div class="rating-label">Never Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">2</div>
+                                <div class="rating-label">Almost Never Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">3</div>
+                                <div class="rating-label">Occasionally Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">4</div>
+                                <div class="rating-label">Frequently Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">5</div>
+                                <div class="rating-label">Practice Fully Embedded</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="actionable-plan-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 16%;">STEP 1<br><small>Where are we now?</small></th>
+                                <th style="width: 16%;">STEP 2<br><small>What to do?</small></th>
+                                <th style="width: 16%;">STEP 3<br><small>How to achieve?</small></th>
+                                <th style="width: 16%;">STEP 4<br><small>Who is responsible?</small></th>
+                                <th style="width: 16%;">STEP 5<br><small>Timeline?</small></th>
+                                <th style="width: 10%;">Current Rating</th>
+                                <th style="width: 10%;">Target Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <textarea class="table-textarea" placeholder="Assess current practice">Co-constructed rubrics are almost never used for assessment</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="table-textarea" placeholder="Define goals">Develop and use rubrics to measure learning outcomes and analyze effects of teaching styles</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="table-textarea" placeholder="Action steps">Undertake PD on rubrics, involve all teachers in determining criteria, design rating scales, write descriptors, co-create rubrics, modify based on usage</textarea>
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input" placeholder="Person/Team" value="Principal and all teachers">
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input" placeholder="Timeline" value="April 2024 - Quarterly review">
+                                </td>
+                                <td>
+                                    <select class="rating-select">
+                                        <option value="">Select</option>
+                                        <option value="1">1 - Never</option>
+                                        <option value="2" selected>2 - Almost Never</option>
+                                        <option value="3">3 - Occasionally</option>
+                                        <option value="4">4 - Frequently</option>
+                                        <option value="5">5 - Fully Embedded</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="rating-select">
+                                        <option value="">Select</option>
+                                        <option value="1">1 - Never</option>
+                                        <option value="2">2 - Almost Never</option>
+                                        <option value="3">3 - Occasionally</option>
+                                        <option value="4">4 - Frequently</option>
+                                        <option value="5" selected>5 - Fully Embedded</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- DESCRIPTOR 2 -->
+                <div class="descriptor-container">
+                    <div class="descriptor-header">
+                        <div class="descriptor-number">2</div>
+                        <div class="descriptor-title-section">
+                            <div class="descriptor-title">Initiating Innovations in Schools & SDG Goals</div>
+                            <div class="descriptor-subtitle">Creating opportunities for student learning, innovation, and sustainable development</div>
+                        </div>
+                    </div>
+
+                    <div class="rating-scale-info">
+                        <div class="rating-scale-title">⭐ Rating Scale Guide (Assess Current Status)</div>
+                        <div class="rating-scale-grid">
+                            <div class="rating-item">
+                                <div class="rating-number">1</div>
+                                <div class="rating-label">Never Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">2</div>
+                                <div class="rating-label">Almost Never Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">3</div>
+                                <div class="rating-label">Occasionally Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">4</div>
+                                <div class="rating-label">Frequently Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">5</div>
+                                <div class="rating-label">Practice Fully Embedded</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="actionable-plan-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 16%;">STEP 1<br><small>Where are we now?</small></th>
+                                <th style="width: 16%;">STEP 2<br><small>What to do?</small></th>
+                                <th style="width: 16%;">STEP 3<br><small>How to achieve?</small></th>
+                                <th style="width: 16%;">STEP 4<br><small>Who is responsible?</small></th>
+                                <th style="width: 16%;">STEP 5<br><small>Timeline?</small></th>
+                                <th style="width: 10%;">Current Rating</th>
+                                <th style="width: 10%;">Target Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <textarea class="table-textarea">Occasionally provide opportunities for students to innovate</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="table-textarea">Build understanding of innovation, increase opportunities, promote mindset change about what is innovation</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="table-textarea">Collect data about areas of student interest, create challenges through workshops and idea boards, create culture without fear of failure, provide incentives and appreciation certificates</textarea>
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input" value="Principal, Subject Teachers, Student Leaders, Parents">
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input" value="Q1: Apr-Jun 2024, Review: Jul-Aug, Implementation: Sep onwards">
+                                </td>
+                                <td>
+                                    <select class="rating-select">
+                                        <option value="">Select</option>
+                                        <option value="1">1 - Never</option>
+                                        <option value="2">2 - Almost Never</option>
+                                        <option value="3" selected>3 - Occasionally</option>
+                                        <option value="4">4 - Frequently</option>
+                                        <option value="5">5 - Fully Embedded</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="rating-select">
+                                        <option value="">Select</option>
+                                        <option value="1">1 - Never</option>
+                                        <option value="2">2 - Almost Never</option>
+                                        <option value="3">3 - Occasionally</option>
+                                        <option value="4" selected>4 - Frequently</option>
+                                        <option value="5">5 - Fully Embedded</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- DESCRIPTOR 3 -->
+                <div class="descriptor-container">
+                    <div class="descriptor-header">
+                        <div class="descriptor-number">3</div>
+                        <div class="descriptor-title-section">
+                            <div class="descriptor-title">Leading the Teaching-Learning Process</div>
+                            <div class="descriptor-subtitle">Encouraging reflective practitioners through collaboration and exchange programs</div>
+                        </div>
+                    </div>
+
+                    <div class="rating-scale-info">
+                        <div class="rating-scale-title">⭐ Rating Scale Guide (Assess Current Status)</div>
+                        <div class="rating-scale-grid">
+                            <div class="rating-item">
+                                <div class="rating-number">1</div>
+                                <div class="rating-label">Never Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">2</div>
+                                <div class="rating-label">Almost Never Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">3</div>
+                                <div class="rating-label">Occasionally Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">4</div>
+                                <div class="rating-label">Frequently Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">5</div>
+                                <div class="rating-label">Practice Fully Embedded</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="actionable-plan-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 16%;">STEP 1<br><small>Where are we now?</small></th>
+                                <th style="width: 16%;">STEP 2<br><small>What to do?</small></th>
+                                <th style="width: 16%;">STEP 3<br><small>How to achieve?</small></th>
+                                <th style="width: 16%;">STEP 4<br><small>Who is responsible?</small></th>
+                                <th style="width: 16%;">STEP 5<br><small>Timeline?</small></th>
+                                <th style="width: 10%;">Current Rating</th>
+                                <th style="width: 10%;">Target Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <textarea class="table-textarea">Occasionally collaborate with different schools locally, nationally, and globally for exchange programs</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="table-textarea">Develop collaboration with different schools and plan exchange programs for teachers and students</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="table-textarea">Use CBSE Hubs of Learning, nominate person for collaboration, approach local schools, identify best schools nationally/globally, formalize processes</textarea>
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input" value="Principal, HOD, Nominated Coordinator">
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input" value="Apr-Jun: Establish, Jul-Aug: Formalize, Sep-Dec: Work collaboratively">
+                                </td>
+                                <td>
+                                    <select class="rating-select">
+                                        <option value="">Select</option>
+                                        <option value="1">1 - Never</option>
+                                        <option value="2">2 - Almost Never</option>
+                                        <option value="3" selected>3 - Occasionally</option>
+                                        <option value="4">4 - Frequently</option>
+                                        <option value="5">5 - Fully Embedded</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="rating-select">
+                                        <option value="">Select</option>
+                                        <option value="1">1 - Never</option>
+                                        <option value="2">2 - Almost Never</option>
+                                        <option value="3">3 - Occasionally</option>
+                                        <option value="4" selected>4 - Frequently</option>
+                                        <option value="5">5 - Fully Embedded</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- DESCRIPTOR 4 -->
+                <div class="descriptor-container">
+                    <div class="descriptor-header">
+                        <div class="descriptor-number">4</div>
+                        <div class="descriptor-title-section">
+                            <div class="descriptor-title">Developing a Learning Culture</div>
+                            <div class="descriptor-subtitle">Making parents active partners in the educational journey of their child</div>
+                        </div>
+                    </div>
+
+                    <div class="rating-scale-info">
+                        <div class="rating-scale-title">⭐ Rating Scale Guide (Assess Current Status)</div>
+                        <div class="rating-scale-grid">
+                            <div class="rating-item">
+                                <div class="rating-number">1</div>
+                                <div class="rating-label">Never Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">2</div>
+                                <div class="rating-label">Almost Never Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">3</div>
+                                <div class="rating-label">Occasionally Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">4</div>
+                                <div class="rating-label">Frequently Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">5</div>
+                                <div class="rating-label">Practice Fully Embedded</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="actionable-plan-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 16%;">STEP 1<br><small>Where are we now?</small></th>
+                                <th style="width: 16%;">STEP 2<br><small>What to do?</small></th>
+                                <th style="width: 16%;">STEP 3<br><small>How to achieve?</small></th>
+                                <th style="width: 16%;">STEP 4<br><small>Who is responsible?</small></th>
+                                <th style="width: 16%;">STEP 5<br><small>Timeline?</small></th>
+                                <th style="width: 10%;">Current Rating</th>
+                                <th style="width: 10%;">Target Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <textarea class="table-textarea">Parents occasionally participate in school activities</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="table-textarea">Ensure active participation of parents in the educational journey of their child</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="table-textarea">Design innovative ways to engage parents, hold workshops on parenting, invite parents as resource persons, create parent groups working with principal on school improvement</textarea>
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input" value="Principal, Teachers, Parents">
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input" value="By end of March 2025, ongoing through academic session">
+                                </td>
+                                <td>
+                                    <select class="rating-select">
+                                        <option value="">Select</option>
+                                        <option value="1">1 - Never</option>
+                                        <option value="2">2 - Almost Never</option>
+                                        <option value="3" selected>3 - Occasionally</option>
+                                        <option value="4">4 - Frequently</option>
+                                        <option value="5">5 - Fully Embedded</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="rating-select">
+                                        <option value="">Select</option>
+                                        <option value="1">1 - Never</option>
+                                        <option value="2">2 - Almost Never</option>
+                                        <option value="3">3 - Occasionally</option>
+                                        <option value="4">4 - Frequently</option>
+                                        <option value="5" selected>5 - Fully Embedded</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- DESCRIPTOR 5 -->
+                <div class="descriptor-container">
+                    <div class="descriptor-header">
+                        <div class="descriptor-number">5</div>
+                        <div class="descriptor-title-section">
+                            <div class="descriptor-title">Building an Inclusive Culture</div>
+                            <div class="descriptor-subtitle">Formulating inclusive policies and structures for children with special needs</div>
+                        </div>
+                    </div>
+
+                    <div class="rating-scale-info">
+                        <div class="rating-scale-title">⭐ Rating Scale Guide (Assess Current Status)</div>
+                        <div class="rating-scale-grid">
+                            <div class="rating-item">
+                                <div class="rating-number">1</div>
+                                <div class="rating-label">Never Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">2</div>
+                                <div class="rating-label">Almost Never Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">3</div>
+                                <div class="rating-label">Occasionally Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">4</div>
+                                <div class="rating-label">Frequently Practiced</div>
+                            </div>
+                            <div class="rating-item">
+                                <div class="rating-number">5</div>
+                                <div class="rating-label">Practice Fully Embedded</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="actionable-plan-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 16%;">STEP 1<br><small>Where are we now?</small></th>
+                                <th style="width: 16%;">STEP 2<br><small>What to do?</small></th>
+                                <th style="width: 16%;">STEP 3<br><small>How to achieve?</small></th>
+                                <th style="width: 16%;">STEP 4<br><small>Who is responsible?</small></th>
+                                <th style="width: 16%;">STEP 5<br><small>Timeline?</small></th>
+                                <th style="width: 10%;">Current Rating</th>
+                                <th style="width: 10%;">Target Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <textarea class="table-textarea">Teachers are not trained enough to support children with special needs; inadequate support for CwSN</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="table-textarea">Improve teachers' knowledge and skills in supporting students with special needs in teaching-learning process</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="table-textarea">Conduct needs analysis, engage special educators on part-time basis, enhance engagement and value achievement of all learners, emphasize group processes, practice distributed leadership for participatory decision-making</textarea>
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input" value="Principal, Special Educator, All Teachers">
+                                </td>
+                                <td>
+                                    <input type="text" class="table-input" value="Start April 2024, quarterly training throughout year">
+                                </td>
+                                <td>
+                                    <select class="rating-select">
+                                        <option value="">Select</option>
+                                        <option value="1">1 - Never</option>
+                                        <option value="2" selected>2 - Almost Never</option>
+                                        <option value="3">3 - Occasionally</option>
+                                        <option value="4">4 - Frequently</option>
+                                        <option value="5">5 - Fully Embedded</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="rating-select">
+                                        <option value="">Select</option>
+                                        <option value="1">1 - Never</option>
+                                        <option value="2">2 - Almost Never</option>
+                                        <option value="3">3 - Occasionally</option>
+                                        <option value="4">4 - Frequently</option>
+                                        <option value="5" selected>5 - Fully Embedded</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Button Group -->
+                <div class="button-group">
+                    <button type="reset" class="btn btn-reset" onclick="return confirmReset()">Reset Form</button>
+                    <button type="button" class="btn btn-secondary" onclick="showPreview()">Preview Plans</button>
+                    <button type="submit" class="btn btn-primary">Save Plans</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="preview-modal">
+        <div class="preview-content">
+            <div class="preview-actions">
+                <button class="btn-print" onclick="window.print()">🖨 Print</button>
+                <button class="close-preview" onclick="closePreview()">×</button>
+            </div>
+            <div id="previewBody"></div>
+        </div>
+    </div>
+
+    <div class="floating-indicator" id="floatingIndicator">💾 Auto-saving...</div>
+
+    <script>
+        // Preview functionality
+        function showPreview() {
+            const modal = document.getElementById('previewModal');
+            const previewBody = document.getElementById('previewBody');
+            
+            let previewHTML = '<h1 style="text-align:center;color:#2c3e50;margin-bottom:30px;font-family:Poppins;">DESCRIPTOR-BASED ACTIONABLE PLANS</h1>';
+            previewHTML += '<p style="text-align:center;color:#64748b;margin-bottom:40px;font-family:Poppins;">5-Step Framework with Rating Scale Assessment</p>';
+            
+            previewBody.innerHTML = previewHTML;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePreview() {
+            document.getElementById('previewModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('previewModal');
+            if (event.target === modal) closePreview();
+        }
+
+        // Form submission
+        document.getElementById('descriptorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 4000);
+        });
+
+        function confirmReset() {
+            return confirm('Are you sure you want to reset all descriptors? All data will be lost.');
+        }
+
+        // Auto-save indicator
+        let autoSaveTimeout;
+        document.addEventListener('input', function(e) {
+            clearTimeout(autoSaveTimeout);
+            const indicator = document.getElementById('floatingIndicator');
+            indicator.style.display = 'block';
+            autoSaveTimeout = setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 2000);
+            updateProgress();
+        });
+
+        // Progress tracking
+        function updateProgress() {
+            const textareas = document.querySelectorAll('.table-textarea');
+            const inputs = document.querySelectorAll('.table-input');
+            const selects = document.querySelectorAll('.rating-select');
+            
+            let filled = 0;
+            let total = 0;
+            
+            textareas.forEach(textarea => {
+                total++;
+                if (textarea.value.trim() !== '') filled++;
+            });
+            
+            inputs.forEach(input => {
+                total++;
+                if (input.value.trim() !== '') filled++;
+            });
+            
+            selects.forEach(select => {
+                total++;
+                if (select.value !== '') filled++;
+            });
+            
+            const percentage = total > 0 ? (filled / total) * 100 : 0;
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        // Initialize progress
+        updateProgress();
+    </script>
+</body>
+</html>

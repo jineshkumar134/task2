@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLN, Special Days & Assembly Protocol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Quill Editor CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff5f0 0%, #e8f2ff 100%);
+            padding: 40px 20px;
+            color: #2c3e50;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header h1 {
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            margin-top: 10px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-content {
+            padding: 50px;
+            background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b35 0%, #2563eb 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .form-section:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            margin-right: 15px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            flex: 1;
+        }
+
+        .subsection-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #eff6ff 0%, #fff5f0 100%);
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: linear-gradient(180deg, #ff6b35 0%, #2563eb 100%);
+            border-radius: 2px;
+            margin-right: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e8ecf0;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), 0 4px 15px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-input:hover {
+            border-color: #cbd5e0;
+            background: white;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #e8ecf0;
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+        }
+
+        .data-table th {
+            padding: 12px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .data-table td {
+            padding: 12px;
+            border: 1px solid #e8ecf0;
+            text-align: left;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .table-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+        }
+
+        .table-input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .table-textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .table-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .editor-container {
+            background: white;
+            border: 2px solid #e8ecf0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .editor-container:hover {
+            border-color: #cbd5e0;
+        }
+
+        .editor-container.focused {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), 0 4px 15px rgba(37, 99, 235, 0.1);
+        }
+
+        .ql-toolbar {
+            background: #f8fafc;
+            border: none !important;
+            border-bottom: 1px solid #e8ecf0 !important;
+        }
+
+        .ql-container {
+            border: none !important;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            min-height: 120px;
+        }
+
+        .ql-editor {
+            min-height: 120px;
+            padding: 14px 18px;
+        }
+
+        .ql-editor.ql-blank::before {
+            color: #94a3b8;
+            font-style: normal;
+        }
+
+        .assembly-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 4px solid #2563eb;
+            transition: all 0.3s ease;
+        }
+
+        .assembly-step:hover {
+            background: #eff6ff;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .step-description {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .step-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+            margin-top: 5px;
+        }
+
+        .step-input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .btn-add-row {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-add-row:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-delete-row {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-delete-row:hover {
+            background: #dc2626;
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 2px solid #34d399;
+            color: #065f46;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(52, 211, 153, 0.2);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px solid #e8ecf0;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-reset {
+            background: white;
+            color: #4a5568;
+            border: 2px solid #e8ecf0;
+        }
+
+        .btn-reset:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        .preview-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .preview-content {
+            position: relative;
+            background: white;
+            margin: 3% auto;
+            padding: 50px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .preview-actions {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .close-preview {
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .close-preview:hover {
+            background: #dc2626;
+            transform: rotate(90deg);
+        }
+
+        .floating-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ff6b35 0%, #2563eb 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            font-size: 14px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .form-content {
+                padding: 30px 20px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .table-container {
+                overflow-x: scroll;
+            }
+        }
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .preview-modal {
+                position: relative;
+                display: block !important;
+                background: white;
+            }
+
+            .preview-content {
+                box-shadow: none;
+                max-height: none;
+                margin: 0;
+                width: 100%;
+                padding: 0;
+                overflow: visible;
+            }
+
+            .preview-actions,
+            .close-preview,
+            .floating-indicator,
+            .container,
+            .header,
+            .form-content {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 FLN, SPECIAL DAYS & ASSEMBLY PROTOCOL</h1>
+            <p class="header-subtitle">Foundational Literacy & Numeracy | Special Days Calendar | Morning Assembly Structure</p>
+        </div>
+
+        <div class="form-content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                ✓ All sections saved successfully!
+            </div>
+
+            <form id="flnAssemblyForm">
+                <!-- Section 1: FLN Implementation Plan -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">1</div>
+                        <div class="section-title">FLN Implementation Plan (Foundational Literacy & Numeracy)</div>
+                    </div>
+                    
+                    <div class="subsection-title">Key FLN Strategies</div>
+                    <div class="form-group">
+                        <label class="form-label">Overall FLN Vision & Approach</label>
+                        <div class="editor-container" id="flnVisionEditorContainer">
+                            <div id="flnVisionEditor"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection-title">FLN Activities & Implementation</div>
+                    <div class="form-group">
+                        <div class="table-container">
+                            <table class="data-table" id="flnActivitiesTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;">S.No.</th>
+                                        <th style="width: 25%;">FLN Activity/Strategy</th>
+                                        <th style="width: 35%;">Description & Implementation</th>
+                                        <th style="width: 15%;">Target Classes</th>
+                                        <th style="width: 15%;">Resources Required</th>
+                                        <th style="width: 5%;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="1" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="Vidya Parvesh"></td>
+                                        <td><textarea class="table-textarea" placeholder="3-week transition program for Class I"></textarea></td>
+                                        <td><input type="text" class="table-input" value="Class I"></td>
+                                        <td><input type="text" class="table-input" placeholder="Activity kits"></textarea></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="2" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="Phonics for Reading"></td>
+                                        <td><textarea class="table-textarea" placeholder="Systematic phonics instruction"></textarea></td>
+                                        <td><input type="text" class="table-input" value="Class I-II"></td>
+                                        <td><input type="text" class="table-input" placeholder="Flashcards, charts"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="3" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="Print-Rich Environment"></td>
+                                        <td><textarea class="table-textarea" placeholder="Classroom walls with labels, charts, posters"></textarea></td>
+                                        <td><input type="text" class="table-input" value="Class I-III"></td>
+                                        <td><input type="text" class="table-input" placeholder="Printed materials"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="4" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="Toy-Based Pedagogy"></td>
+                                        <td><textarea class="table-textarea" placeholder="Learning through play and toys"></textarea></td>
+                                        <td><input type="text" class="table-input" value="Class I-II"></td>
+                                        <td><input type="text" class="table-input" placeholder="Educational toys"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="5" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="Activity-Based Learning"></td>
+                                        <td><textarea class="table-textarea" placeholder="Experiential learning through hands-on activities"></textarea></td>
+                                        <td><input type="text" class="table-input" value="Class I-III"></td>
+                                        <td><input type="text" class="table-input" placeholder="Activity materials"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="6" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="Multilingualism"></td>
+                                        <td><textarea class="table-textarea" placeholder="Mother tongue + English/Hindi in classroom"></textarea></td>
+                                        <td><input type="text" class="table-input" value="Class I-III"></td>
+                                        <td><input type="text" class="table-input" placeholder="Bilingual materials"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="7" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="Number Sense Development"></td>
+                                        <td><textarea class="table-textarea" placeholder="Concrete to abstract numeracy concepts"></textarea></td>
+                                        <td><input type="text" class="table-input" value="Class I-III"></td>
+                                        <td><input type="text" class="table-input" placeholder="Counting materials"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addFlnActivityRow()">+ Add FLN Activity</button>
+                    </div>
+                    
+                    <div class="subsection-title">FLN Assessment & Monitoring</div>
+                    <div class="form-group">
+                        <div class="table-container">
+                            <table class="data-table" id="flnAssessmentTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;">S.No.</th>
+                                        <th style="width: 25%;">Assessment Type</th>
+                                        <th style="width: 30%;">Assessment Tools</th>
+                                        <th style="width: 20%;">Frequency</th>
+                                        <th style="width: 15%;">Responsible Person</th>
+                                        <th style="width: 5%;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="1" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" placeholder="Assessment type"></td>
+                                        <td><input type="text" class="table-input" placeholder="Tools used"></td>
+                                        <td><input type="text" class="table-input" placeholder="Weekly/Monthly"></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addFlnAssessmentRow()">+ Add Assessment</button>
+                    </div>
+                </div>
+
+                <!-- Section 2: Special Days Celebration Calendar -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">2</div>
+                        <div class="section-title">Special Days Celebration Calendar</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="table-container">
+                            <table class="data-table" id="specialDaysTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;">S.No.</th>
+                                        <th style="width: 10%;">Month</th>
+                                        <th style="width: 10%;">Date</th>
+                                        <th style="width: 25%;">Special Day/Event</th>
+                                        <th style="width: 35%;">Planned Activities</th>
+                                        <th style="width: 10%;">Responsible</th>
+                                        <th style="width: 5%;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="1" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="April"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="Ambedkar Jayanti"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="2" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="April"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="Earth Day"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="3" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="May"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="Labour Day"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="4" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="May"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="Mother's Day"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="5" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="August"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="Independence Day"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="6" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="October"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="Gandhi Jayanti"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="7" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="October"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="National Unity Day"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="8" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="November"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="Children's Day"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="9" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="December"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="World AIDS Day"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="10" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="December"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="Christmas"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="11" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="January"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="Republic Day"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="number" class="table-input" value="12" style="text-align:center;"></td>
+                                        <td><input type="text" class="table-input" value="March"></td>
+                                        <td><input type="date" class="table-input"></td>
+                                        <td><input type="text" class="table-input" value="International Women's Day"></td>
+                                        <td><textarea class="table-textarea" placeholder="Activities planned"></textarea></td>
+                                        <td><input type="text" class="table-input" placeholder="Name"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addSpecialDayRow()">+ Add Special Day</button>
+                    </div>
+                </div>
+
+                <!-- Section 3: Morning Assembly Protocol -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">3</div>
+                        <div class="section-title">Morning Assembly Protocol</div>
+                    </div>
+                    
+                    <div class="subsection-title">Assembly Sequence & Structure</div>
+                    <div class="form-group">
+                        <label class="form-label">Assembly Duration & Timing</label>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                            <input type="time" class="form-input" placeholder="Start Time" id="assemblyStartTime">
+                            <input type="time" class="form-input" placeholder="End Time" id="assemblyEndTime">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Assembly Steps (in sequence)</label>
+                        <div id="assemblyStepsContainer">
+                            <div class="assembly-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <div class="step-title">Opening Prayer / Shloka</div>
+                                    <input type="text" class="step-input" placeholder="Enter prayer/shloka text or description" value="Sanskrit Shloka">
+                                </div>
+                            </div>
+                            
+                            <div class="assembly-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <div class="step-title">School Prayer / Anthem</div>
+                                    <input type="text" class="step-input" placeholder="Enter prayer text or description" value="School Prayer">
+                                </div>
+                            </div>
+                            
+                            <div class="assembly-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <div class="step-title">Students' Pledge</div>
+                                    <input type="text" class="step-input" placeholder="Pledge text" value="India is my country. All Indians are my brothers and sisters...">
+                                </div>
+                            </div>
+                            
+                            <div class="assembly-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <div class="step-title">Thought for the Day</div>
+                                    <input type="text" class="step-input" placeholder="Who presents? Format?" value="Student presentation with explanation">
+                                </div>
+                            </div>
+                            
+                            <div class="assembly-step">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <div class="step-title">Daily News Headlines</div>
+                                    <input type="text" class="step-input" placeholder="Format and source" value="3-4 major headlines (National & International)">
+                                </div>
+                            </div>
+                            
+                            <div class="assembly-step">
+                                <div class="step-number">6</div>
+                                <div class="step-content">
+                                    <div class="step-title">Special Item / Performance</div>
+                                    <input type="text" class="step-input" placeholder="Song/Dance/Speech/Skit etc." value="Song, dance, skit, speech or special announcement">
+                                </div>
+                            </div>
+                            
+                            <div class="assembly-step">
+                                <div class="step-number">7</div>
+                                <div class="step-content">
+                                    <div class="step-title">Principal's / Teacher's Address</div>
+                                    <input type="text" class="step-input" placeholder="Format and duration" value="2-3 minutes motivational talk">
+                                </div>
+                            </div>
+                            
+                            <div class="assembly-step">
+                                <div class="step-number">8</div>
+                                <div class="step-content">
+                                    <div class="step-title">Silent Prayer / Meditation</div>
+                                    <input type="text" class="step-input" placeholder="Duration" value="2 minutes of silence">
+                                </div>
+                            </div>
+                            
+                            <div class="assembly-step">
+                                <div class="step-number">9</div>
+                                <div class="step-content">
+                                    <div class="step-title">National Anthem</div>
+                                    <input type="text" class="step-input" placeholder="Full/Abbreviated version" value="Jana Gana Mana (Full version)">
+                                </div>
+                            </div>
+                            
+                            <div class="assembly-step">
+                                <div class="step-number">10</div>
+                                <div class="step-content">
+                                    <div class="step-title">Dispersal</div>
+                                    <input type="text" class="step-input" placeholder="Dispersal procedure" value="Marching song while moving to classes">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="subsection-title">Class-wise Assembly Rotation Schedule</div>
+                    <div class="form-group">
+                        <div class="table-container">
+                            <table class="data-table" id="assemblyRotationTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%;">Week</th>
+                                        <th style="width: 15%;">Date Range</th>
+                                        <th style="width: 15%;">Class Responsible</th>
+                                        <th style="width: 20%;">Class Teacher In-charge</th>
+                                        <th style="width: 30%;">Theme</th>
+                                        <th style="width: 10%;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="table-input" placeholder="Week 1"></td>
+                                        <td><input type="text" class="table-input" placeholder="1-5 April"></td>
+                                        <td><input type="text" class="table-input" placeholder="Class X-A"></td>
+                                        <td><input type="text" class="table-input" placeholder="Teacher name"></td>
+                                        <td><input type="text" class="table-input" placeholder="Weekly theme"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addAssemblyRotationRow()">+ Add Week</button>
+                    </div>
+                    
+                    <div class="subsection-title">Assembly Guidelines & Notes</div>
+                    <div class="form-group">
+                        <label class="form-label">General Guidelines</label>
+                        <div class="editor-container" id="assemblyGuidelinesEditorContainer">
+                            <div id="assemblyGuidelinesEditor"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button Group -->
+                <div class="button-group">
+                    <button type="reset" class="btn btn-reset" onclick="return confirmReset()">Reset Form</button>
+                    <button type="button" class="btn btn-secondary" onclick="showPreview()">Preview Sections</button>
+                    <button type="submit" class="btn btn-primary">Save Sections</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="preview-modal">
+        <div class="preview-content">
+            <div class="preview-actions">
+                <button class="btn-print" onclick="window.print()">🖨 Print</button>
+                <button class="close-preview" onclick="closePreview()">×</button>
+            </div>
+            <div id="previewBody"></div>
+        </div>
+    </div>
+
+    <div class="floating-indicator" id="floatingIndicator">💾 Auto-saving...</div>
+
+    <!-- Quill Editor JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        // Initialize Quill editors
+        const editors = {};
+
+        function initializeEditor(editorId, containerId, placeholder) {
+            const quill = new Quill(`#${editorId}`, {
+                theme: 'snow',
+                placeholder: placeholder,
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic', 'underline'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['clean']
+                    ]
+                }
+            });
+
+            const container = document.getElementById(containerId);
+            quill.on('selection-change', function(range) {
+                if (range) {
+                    container.classList.add('focused');
+                } else {
+                    container.classList.remove('focused');
+                }
+            });
+
+            editors[editorId] = quill;
+            quill.on('text-change', updateProgress);
+            return quill;
+        }
+
+        // Initialize all editors
+        initializeEditor('flnVisionEditor', 'flnVisionEditorContainer', 'Enter FLN vision and approach (use "-" for bullet points)');
+        initializeEditor('assemblyGuidelinesEditor', 'assemblyGuidelinesEditorContainer', 'Enter assembly guidelines (use "-" for bullet points)');
+
+        // Table management functions
+        function deleteTableRow(btn) {
+            if (confirm('Are you sure you want to delete this row?')) {
+                btn.closest('tr').remove();
+                updateProgress();
+            }
+        }
+
+        function addFlnActivityRow() {
+            const tbody = document.querySelector('#flnActivitiesTable tbody');
+            const rowCount = tbody.rows.length + 1;
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="number" class="table-input" value="${rowCount}" style="text-align:center;"></td>
+                <td><input type="text" class="table-input" placeholder="FLN activity"></td>
+                <td><textarea class="table-textarea" placeholder="Description"></textarea></td>
+                <td><input type="text" class="table-input" placeholder="Target classes"></td>
+                <td><input type="text" class="table-input" placeholder="Resources"></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        function addFlnAssessmentRow() {
+            const tbody = document.querySelector('#flnAssessmentTable tbody');
+            const rowCount = tbody.rows.length + 1;
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="number" class="table-input" value="${rowCount}" style="text-align:center;"></td>
+                <td><input type="text" class="table-input" placeholder="Assessment type"></td>
+                <td><input type="text" class="table-input" placeholder="Tools"></td>
+                <td><input type="text" class="table-input" placeholder="Frequency"></td>
+                <td><input type="text" class="table-input" placeholder="Name"></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        function addSpecialDayRow() {
+            const tbody = document.querySelector('#specialDaysTable tbody');
+            const rowCount = tbody.rows.length + 1;
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="number" class="table-input" value="${rowCount}" style="text-align:center;"></td>
+                <td><input type="text" class="table-input" placeholder="Month"></td>
+                <td><input type="date" class="table-input"></td>
+                <td><input type="text" class="table-input" placeholder="Special day"></td>
+                <td><textarea class="table-textarea" placeholder="Activities"></textarea></td>
+                <td><input type="text" class="table-input" placeholder="Name"></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        function addAssemblyRotationRow() {
+            const tbody = document.querySelector('#assemblyRotationTable tbody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Week"></td>
+                <td><input type="text" class="table-input" placeholder="Date range"></td>
+                <td><input type="text" class="table-input" placeholder="Class"></td>
+                <td><input type="text" class="table-input" placeholder="Teacher"></td>
+                <td><input type="text" class="table-input" placeholder="Theme"></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        // Preview functionality
+        function showPreview() {
+            const modal = document.getElementById('previewModal');
+            const previewBody = document.getElementById('previewBody');
+            
+            let previewHTML = '<h1 style="text-align:center;color:#2c3e50;margin-bottom:30px;">FLN, SPECIAL DAYS & ASSEMBLY PROTOCOL</h1>';
+            previewHTML += '<p style="text-align:center;color:#64748b;margin-bottom:40px;">Complete Implementation Document</p>';
+            
+            previewBody.innerHTML = previewHTML;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePreview() {
+            document.getElementById('previewModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('previewModal');
+            if (event.target === modal) closePreview();
+        }
+
+        // Form submission
+        document.getElementById('flnAssemblyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 4000);
+        });
+
+        function confirmReset() {
+            return confirm('Are you sure you want to reset the entire form? All data will be lost.');
+        }
+
+        // Auto-save indicator
+        let autoSaveTimeout;
+        document.addEventListener('input', function(e) {
+            clearTimeout(autoSaveTimeout);
+            const indicator = document.getElementById('floatingIndicator');
+            indicator.style.display = 'block';
+            autoSaveTimeout = setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 2000);
+        });
+
+        // Progress tracking
+        function updateProgress() {
+            const inputs = document.querySelectorAll('.form-input, .table-input, .table-textarea, .step-input');
+            let filled = 0;
+            inputs.forEach(input => {
+                if (input.value.trim() !== '') filled++;
+            });
+            
+            Object.keys(editors).forEach(key => {
+                if (editors[key].getText().trim().length > 0) filled++;
+            });
+            
+            const totalFields = inputs.length + Object.keys(editors).length;
+            const percentage = totalFields > 0 ? (filled / totalFields) * 100 : 0;
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        document.addEventListener('input', updateProgress);
+        updateProgress();
+    </script>
+</body>
+</html>

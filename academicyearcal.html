@@ -1,0 +1,1475 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academic Yearly Planner</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #fff5f0 0%, #e8f2ff 100%);
+      color: #2c3e50;
+      animation: pageFade 0.5s ease;
+    }
+
+    @keyframes pageFade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .app-wrapper {
+      min-height: 100vh;
+      padding: 32px 20px;
+    }
+
+    .planner-shell {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 0.55s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header-bar {
+      background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+      color: #fff;
+      padding: 42px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-bar::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -120% auto;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%);
+      pointer-events: none;
+      animation: pulseFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes pulseFloat {
+      0%, 100% { transform: scale(1) translateY(0); opacity: 0.6; }
+      50% { transform: scale(1.08) translateY(-10px); opacity: 0.9; }
+    }
+
+    .header-left {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-title {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .header-subtitle {
+      font-size: 14px;
+      opacity: 0.95;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+      justify-content: flex-end;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger,
+    .btn-soft {
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      color: #fff;
+      padding: 12px 20px;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37, 99, 235, 0.38);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      padding: 12px 20px;
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.25);
+    }
+
+    .btn-soft {
+      background: #fff;
+      color: #2563eb;
+      padding: 9px 14px;
+      border: 1px solid #dbeafe;
+    }
+
+    .btn-soft:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.16);
+      border-color: #93c5fd;
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: #fff;
+      padding: 9px 14px;
+    }
+
+    .btn-danger:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+    }
+
+    .content-area {
+      padding: 36px;
+      background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
+    }
+
+    .top-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid #eef2f7;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      animation: floatCard 0.45s ease both;
+    }
+
+    .stat-card:nth-child(2) { animation-delay: 0.05s; }
+    .stat-card:nth-child(3) { animation-delay: 0.1s; }
+    .stat-card:nth-child(4) { animation-delay: 0.15s; }
+
+    @keyframes floatCard {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .stat-value {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .stat-sub {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .progress-wrap {
+      margin-bottom: 28px;
+    }
+
+    .progress-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .progress-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .progress-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff6b35 0%, #2563eb 100%);
+      transition: width 0.4s ease;
+      border-radius: 999px;
+    }
+
+    .section-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      border: 1px solid #f0f0f0;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      padding-bottom: 18px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .filters-wrap {
+      margin-bottom: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border: 1px solid #e5eefb;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.05);
+      animation: fadeInUp 0.55s ease;
+    }
+
+    .filters-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .filters-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .filters-subtitle {
+      font-size: 12px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .filters-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .filter-group {
+      animation: fadeInUp 0.4s ease both;
+    }
+
+    .filter-group:nth-child(2) { animation-delay: 0.03s; }
+    .filter-group:nth-child(3) { animation-delay: 0.06s; }
+    .filter-group:nth-child(4) { animation-delay: 0.09s; }
+    .filter-group:nth-child(5) { animation-delay: 0.12s; }
+    .filter-group:nth-child(6) { animation-delay: 0.15s; }
+    .filter-group:nth-child(7) { animation-delay: 0.18s; }
+    .filter-group:nth-child(8) { animation-delay: 0.21s; }
+
+    .filter-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 6px;
+    }
+
+    .filter-group input,
+    .filter-group select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 2px solid #e8ecf0;
+      border-radius: 12px;
+      font-size: 13px;
+      font-family: inherit;
+      background: white;
+      color: #334155;
+      transition: all 0.25s ease;
+    }
+
+    .filter-group input:focus,
+    .filter-group select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border: 2px solid #e8ecf0;
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .academic-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1300px;
+      table-layout: fixed;
+      background: #fff;
+    }
+
+    .academic-table thead {
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      color: #fff;
+    }
+
+    .academic-table th {
+      padding: 16px 12px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      border: 1px solid rgba(255,255,255,0.18);
+      vertical-align: middle;
+    }
+
+    .academic-table td {
+      padding: 14px 12px;
+      border: 1px solid #e8ecf0;
+      font-size: 13px;
+      color: #334155;
+      vertical-align: top;
+      background: #fff;
+      transition: background 0.25s ease;
+    }
+
+    .academic-table tbody tr {
+      animation: rowFade 0.28s ease both;
+    }
+
+    @keyframes rowFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .academic-table tbody tr:hover td {
+      background: #f8fbff;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px !important;
+      color: #94a3b8;
+      font-size: 15px !important;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .pill-month {
+      background: #fff7ed;
+      color: #c2410c;
+      border: 1px solid #fed7aa;
+    }
+
+    .pill-year {
+      background: #ecfeff;
+      color: #0f766e;
+      border: 1px solid #a5f3fc;
+    }
+
+    .pill-term {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .pill-unit {
+      background: #f5f3ff;
+      color: #6d28d9;
+      border: 1px solid #ddd6fe;
+    }
+
+    .subject-cell {
+      font-weight: 700;
+      color: #1e293b;
+      font-size: 14px;
+    }
+
+    .month-year-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .expand-card {
+      background: #fff;
+      border: 2px solid #e8ecf0;
+      border-radius: 14px;
+      padding: 12px 14px;
+      min-height: 82px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.25s ease;
+      overflow: hidden;
+    }
+
+    .expand-card:hover {
+      border-color: #2563eb;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.12);
+    }
+
+    .expand-card::after {
+      content: "Click to expand";
+      position: absolute;
+      right: 12px;
+      bottom: 10px;
+      font-size: 11px;
+      color: #64748b;
+      background: rgba(255,255,255,0.95);
+      padding: 3px 8px;
+      border-radius: 999px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+
+    .expand-card:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .expand-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #2563eb;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .expand-card-text {
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .modal-overlay,
+    .detail-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active,
+    .detail-modal.active {
+      display: flex;
+      animation: modalFadeIn 0.25s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 760px;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.24);
+      border: 1px solid #eef2ff;
+      animation: modalPopIn 0.32s ease forwards;
+      transform: scale(0.94) translateY(18px);
+      opacity: 0;
+    }
+
+    .detail-modal-content {
+      width: min(980px, 96vw);
+      max-height: 88vh;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.25);
+      animation: modalPopIn 0.32s ease forwards;
+      transform: scale(0.94) translateY(18px);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes modalPopIn {
+      from {
+        opacity: 0;
+        transform: scale(0.94) translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-header,
+    .detail-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 28px;
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      color: white;
+    }
+
+    .modal-header h3,
+    .detail-modal-header h3 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .modal-sub,
+    .detail-modal-sub {
+      font-size: 13px;
+      opacity: 0.92;
+      margin-top: 4px;
+    }
+
+    .close-btn {
+      background: rgba(255,255,255,0.16);
+      border: none;
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+      font-family: inherit;
+    }
+
+    .close-btn:hover {
+      background: rgba(255,255,255,0.26);
+      transform: rotate(90deg) scale(1.04);
+    }
+
+    .modal-body {
+      padding: 28px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 2px solid #e8ecf0;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      background: white;
+      transition: all 0.25s ease;
+      color: #334155;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.6;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .modal-actions .btn-primary,
+    .modal-actions .btn-soft {
+      flex: 1;
+      min-width: 160px;
+      padding: 14px 18px;
+    }
+
+    .detail-modal-body {
+      padding: 28px;
+      overflow: auto;
+    }
+
+    .detail-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.25);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .detail-card {
+      background: #fff;
+      border: 2px solid #dbeafe;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 8px 30px rgba(37, 99, 235, 0.08);
+    }
+
+    .detail-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .detail-content {
+      color: #334155;
+      font-size: 16px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      background: linear-gradient(135deg, #ff6b35 0%, #2563eb 100%);
+      color: white;
+      padding: 14px 22px;
+      border-radius: 999px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+      font-size: 14px;
+      font-weight: 600;
+      display: none;
+      z-index: 1500;
+    }
+
+    .toast.show {
+      display: block;
+      animation: fadeInUp 0.25s ease;
+    }
+
+    @media (max-width: 1100px) {
+      .top-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .filters-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .app-wrapper {
+        padding: 16px 12px;
+      }
+
+      .header-bar,
+      .content-area {
+        padding: 24px 18px;
+      }
+
+      .header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .button-group {
+        width: 100%;
+      }
+
+      .button-group button {
+        flex: 1;
+      }
+
+      .top-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid,
+      .filters-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-body,
+      .detail-modal-body {
+        padding: 20px;
+      }
+
+      .modal-header,
+      .detail-modal-header {
+        padding: 20px;
+      }
+
+      .detail-modal-content,
+      .modal-content {
+        border-radius: 18px;
+      }
+
+      .modal-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-wrapper">
+    <div class="planner-shell">
+      <div class="header-bar">
+        <div class="header-left">
+          <div class="header-title">📚 Academic Yearly Planner</div>
+          <div class="header-subtitle">Plan the academic year in a structured, polished, and editable tabular flow</div>
+        </div>
+
+        <div class="button-group">
+          <button class="btn-primary" onclick="openAddModal()">
+            <i data-lucide="plus" style="width:16px;height:16px;"></i>
+            Add Row
+          </button>
+
+          <button class="btn-secondary" onclick="exportData()">
+            <i data-lucide="download" style="width:16px;height:16px;"></i>
+            Export
+          </button>
+
+          <button class="btn-secondary" onclick="resetData()">
+            <i data-lucide="rotate-ccw" style="width:16px;height:16px;"></i>
+            Clear All
+          </button>
+        </div>
+      </div>
+
+      <div class="content-area">
+        <div class="top-stats">
+          <div class="stat-card">
+            <div class="stat-label">Total Rows</div>
+            <div class="stat-value" id="statRows">0</div>
+            <div class="stat-sub">Planner entries added</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Subjects</div>
+            <div class="stat-value" id="statSubjects">0</div>
+            <div class="stat-sub">Unique subjects tracked</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Months Covered</div>
+            <div class="stat-value" id="statMonths">0</div>
+            <div class="stat-sub">Distinct month + year combinations</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Terms Covered</div>
+            <div class="stat-value" id="statTerms">0</div>
+            <div class="stat-sub">Academic terms included</div>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-label-row">
+            <div class="progress-title">Planner completeness</div>
+            <div class="progress-value" id="progressText">0%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-head">
+            <div>
+              <div class="section-title">Academic Planning Table</div>
+              <div class="section-desc">Click on long-content boxes like sub topics, pedagogy, or objectives to view them in a focused popup.</div>
+            </div>
+          </div>
+
+          <div class="filters-wrap">
+            <div class="filters-head">
+              <div>
+                <div class="filters-title">Filter Planner Data</div>
+                <div class="filters-subtitle">Use any column filter below to narrow down the visible rows.</div>
+              </div>
+              <button class="btn-soft" onclick="clearFilters()">
+                <i data-lucide="x-circle" style="width:14px;height:14px;"></i>
+                Clear Filters
+              </button>
+            </div>
+
+            <div class="filters-grid">
+              <div class="filter-group">
+                <label for="filterMonth">Month</label>
+                <select id="filterMonth" onchange="applyFilters()">
+                  <option value="">All Months</option>
+                  <option value="April">April</option>
+                  <option value="May">May</option>
+                  <option value="June">June</option>
+                  <option value="July">July</option>
+                  <option value="August">August</option>
+                  <option value="September">September</option>
+                  <option value="October">October</option>
+                  <option value="November">November</option>
+                  <option value="December">December</option>
+                  <option value="January">January</option>
+                  <option value="February">February</option>
+                  <option value="March">March</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="filterAcademicYear">Academic Year</label>
+                <input type="text" id="filterAcademicYear" placeholder="e.g. 2025-26" oninput="applyFilters()" />
+              </div>
+
+              <div class="filter-group">
+                <label for="filterSubject">Subject</label>
+                <input type="text" id="filterSubject" placeholder="Filter subject" oninput="applyFilters()" />
+              </div>
+
+              <div class="filter-group">
+                <label for="filterSubTopics">Sub Topics</label>
+                <input type="text" id="filterSubTopics" placeholder="Filter sub topics" oninput="applyFilters()" />
+              </div>
+
+              <div class="filter-group">
+                <label for="filterPedagogy">Pedagogical Approach</label>
+                <input type="text" id="filterPedagogy" placeholder="Filter pedagogy" oninput="applyFilters()" />
+              </div>
+
+              <div class="filter-group">
+                <label for="filterObjectives">Learning Objectives</label>
+                <input type="text" id="filterObjectives" placeholder="Filter objectives" oninput="applyFilters()" />
+              </div>
+
+              <div class="filter-group">
+                <label for="filterTerm">Term</label>
+                <input type="text" id="filterTerm" placeholder="Filter term" oninput="applyFilters()" />
+              </div>
+
+              <div class="filter-group">
+                <label for="filterUnit">Unit</label>
+                <input type="text" id="filterUnit" placeholder="Filter unit" oninput="applyFilters()" />
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="academic-table">
+              <thead>
+                <tr>
+                  <th style="width: 12%;">Month</th>
+                  <th style="width: 11%;">Subject</th>
+                  <th style="width: 17%;">Sub Topics</th>
+                  <th style="width: 17%;">Pedagogical Approach</th>
+                  <th style="width: 17%;">Learning Objectives</th>
+                  <th style="width: 9%;">Term</th>
+                  <th style="width: 8%;">Unit</th>
+                  <th style="width: 9%;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="addModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h3 id="modalTitle">Add Row</h3>
+          <div class="modal-sub">Fill in the academic planning details below</div>
+        </div>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="month">Month</label>
+            <select id="month">
+              <option value="">Select Month</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="academicYear">Academic Year</label>
+            <input type="text" id="academicYear" placeholder="e.g. 2025-26 or 2025-2026" />
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" placeholder="e.g., Mathematics, English" />
+          </div>
+
+          <div class="form-group">
+            <label for="term">Term</label>
+            <select id="term">
+              <option value="">Select Term</option>
+              <option value="Term 1">Term 1</option>
+              <option value="Term 2">Term 2</option>
+              <option value="Term 3">Term 3</option>
+              <option value="Term 4">Term 4</option>
+              <option value="Term 5">Term 5</option>
+              <option value="Term 6">Term 6</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label for="subTopics">Sub Topics</label>
+            <textarea id="subTopics" placeholder="List sub topics. You can use commas or line breaks."></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label for="pedagogy">Pedagogical Approach</label>
+            <textarea id="pedagogy" placeholder="e.g., Collaborative Learning, Problem-Based Learning"></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label for="objectives">Learning Objectives</label>
+            <textarea id="objectives" placeholder="e.g., Students will be able to..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="unit">Unit</label>
+            <select id="unit">
+              <option value="">Select Unit</option>
+              <option value="Unit 1">Unit 1</option>
+              <option value="Unit 2">Unit 2</option>
+              <option value="Unit 3">Unit 3</option>
+              <option value="Unit 4">Unit 4</option>
+              <option value="Unit 5">Unit 5</option>
+              <option value="Unit 10">Unit 10</option>
+              <option value="Unit 20">Unit 20</option>
+              <option value="Unit 30">Unit 30</option>
+              <option value="Unit 40">Unit 40</option>
+              <option value="Unit 50">Unit 50</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-primary" onclick="saveRow()">
+            <i data-lucide="save" style="width:16px;height:16px;"></i>
+            Save
+          </button>
+          <button class="btn-soft" onclick="closeModal()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Popup -->
+  <div id="detailModal" class="detail-modal">
+    <div class="detail-modal-content">
+      <div class="detail-modal-header">
+        <div>
+          <div class="detail-badge" id="detailBadge">DETAIL VIEW</div>
+          <h3 id="detailTitle">Expanded Content</h3>
+          <div class="detail-modal-sub" id="detailSub">Read the complete cell content here</div>
+        </div>
+        <button class="close-btn" onclick="closeDetailModal()">×</button>
+      </div>
+
+      <div class="detail-modal-body">
+        <div class="detail-card">
+          <div class="detail-meta" id="detailMeta"></div>
+          <div class="detail-content" id="detailContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Saved successfully</div>
+
+  <script>
+    let tableData = [];
+    let editingIndex = -1;
+
+    function openAddModal() {
+      editingIndex = -1;
+      document.getElementById('modalTitle').textContent = 'Add Row';
+      clearForm();
+      document.getElementById('addModal').classList.add('active');
+      refreshIcons();
+    }
+
+    function openEditModal(index) {
+      editingIndex = index;
+      const row = tableData[index];
+      document.getElementById('modalTitle').textContent = 'Edit Row';
+
+      document.getElementById('month').value = row.month || '';
+      document.getElementById('academicYear').value = row.academicYear || '';
+      document.getElementById('subject').value = row.subject || '';
+      document.getElementById('subTopics').value = row.subTopics || '';
+      document.getElementById('pedagogy').value = row.pedagogy || '';
+      document.getElementById('objectives').value = row.objectives || '';
+      document.getElementById('term').value = row.term || '';
+      document.getElementById('unit').value = row.unit || '';
+
+      document.getElementById('addModal').classList.add('active');
+      refreshIcons();
+    }
+
+    function closeModal() {
+      document.getElementById('addModal').classList.remove('active');
+      clearForm();
+    }
+
+    function clearForm() {
+      document.getElementById('month').value = '';
+      document.getElementById('academicYear').value = '';
+      document.getElementById('subject').value = '';
+      document.getElementById('subTopics').value = '';
+      document.getElementById('pedagogy').value = '';
+      document.getElementById('objectives').value = '';
+      document.getElementById('term').value = '';
+      document.getElementById('unit').value = '';
+    }
+
+    function saveRow() {
+      const month = document.getElementById('month').value.trim();
+      const academicYear = document.getElementById('academicYear').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const subTopics = document.getElementById('subTopics').value.trim();
+      const pedagogy = document.getElementById('pedagogy').value.trim();
+      const objectives = document.getElementById('objectives').value.trim();
+      const term = document.getElementById('term').value.trim();
+      const unit = document.getElementById('unit').value.trim();
+
+      if (!month || !academicYear || !subject || !subTopics || !pedagogy || !objectives || !term || !unit) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      const newRow = { month, academicYear, subject, subTopics, pedagogy, objectives, term, unit };
+
+      if (editingIndex >= 0) {
+        tableData[editingIndex] = newRow;
+        showToast('Row updated successfully');
+      } else {
+        tableData.push(newRow);
+        showToast('Row added successfully');
+      }
+
+      renderTable();
+      closeModal();
+    }
+
+    function deleteRow(index) {
+      const ok = confirm('Are you sure you want to delete this row?');
+      if (!ok) return;
+
+      tableData.splice(index, 1);
+      renderTable();
+      showToast('Row deleted');
+    }
+
+    function createExpandableCell(label, text, row) {
+      const safeLabel = escapeHtml(label);
+      const safeText = escapeHtml(text || '');
+
+      return `
+        <div class="expand-card"
+             onclick="openDetailModal('${jsEscape(label)}','${jsEscape(text)}','${jsEscape(row.month)}','${jsEscape(row.academicYear)}','${jsEscape(row.subject)}','${jsEscape(row.term)}','${jsEscape(row.unit)}')">
+          <div class="expand-card-title">${safeLabel}</div>
+          <div class="expand-card-text">${safeText}</div>
+        </div>
+      `;
+    }
+
+    function getFilteredData() {
+      const month = document.getElementById('filterMonth').value.trim().toLowerCase();
+      const academicYear = document.getElementById('filterAcademicYear').value.trim().toLowerCase();
+      const subject = document.getElementById('filterSubject').value.trim().toLowerCase();
+      const subTopics = document.getElementById('filterSubTopics').value.trim().toLowerCase();
+      const pedagogy = document.getElementById('filterPedagogy').value.trim().toLowerCase();
+      const objectives = document.getElementById('filterObjectives').value.trim().toLowerCase();
+      const term = document.getElementById('filterTerm').value.trim().toLowerCase();
+      const unit = document.getElementById('filterUnit').value.trim().toLowerCase();
+
+      return tableData.filter(row => {
+        return (
+          (!month || (row.month || '').toLowerCase().includes(month)) &&
+          (!academicYear || (row.academicYear || '').toLowerCase().includes(academicYear)) &&
+          (!subject || (row.subject || '').toLowerCase().includes(subject)) &&
+          (!subTopics || (row.subTopics || '').toLowerCase().includes(subTopics)) &&
+          (!pedagogy || (row.pedagogy || '').toLowerCase().includes(pedagogy)) &&
+          (!objectives || (row.objectives || '').toLowerCase().includes(objectives)) &&
+          (!term || (row.term || '').toLowerCase().includes(term)) &&
+          (!unit || (row.unit || '').toLowerCase().includes(unit))
+        );
+      });
+    }
+
+    function applyFilters() {
+      renderTable();
+    }
+
+    function clearFilters() {
+      document.getElementById('filterMonth').value = '';
+      document.getElementById('filterAcademicYear').value = '';
+      document.getElementById('filterSubject').value = '';
+      document.getElementById('filterSubTopics').value = '';
+      document.getElementById('filterPedagogy').value = '';
+      document.getElementById('filterObjectives').value = '';
+      document.getElementById('filterTerm').value = '';
+      document.getElementById('filterUnit').value = '';
+      renderTable();
+      showToast('Filters cleared');
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      const filteredData = getFilteredData();
+
+      if (filteredData.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" class="empty-state">
+              No matching data found. Try changing the filters or click <strong>Clear Filters</strong>.
+            </td>
+          </tr>
+        `;
+        updateStats(filteredData);
+        refreshIcons();
+        return;
+      }
+
+      filteredData.forEach((row) => {
+        const originalIndex = tableData.indexOf(row);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>
+            <div class="month-year-stack">
+              <span class="pill pill-month">${escapeHtml(row.month)}</span>
+              <span class="pill pill-year">${escapeHtml(row.academicYear)}</span>
+            </div>
+          </td>
+          <td><div class="subject-cell">${escapeHtml(row.subject)}</div></td>
+          <td>${createExpandableCell('Sub Topics', row.subTopics, row)}</td>
+          <td>${createExpandableCell('Pedagogical Approach', row.pedagogy, row)}</td>
+          <td>${createExpandableCell('Learning Objectives', row.objectives, row)}</td>
+          <td><span class="pill pill-term">${escapeHtml(row.term)}</span></td>
+          <td><span class="pill pill-unit">${escapeHtml(row.unit)}</span></td>
+          <td>
+            <div class="action-buttons">
+              <button class="btn-soft" onclick="openEditModal(${originalIndex})">
+                <i data-lucide="edit-3" style="width:14px;height:14px;"></i>
+                Edit
+              </button>
+              <button class="btn-danger" onclick="deleteRow(${originalIndex})">
+                Delete
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      updateStats(filteredData);
+      refreshIcons();
+    }
+
+    function updateStats(visibleRows = getFilteredData()) {
+      const totalRows = tableData.length;
+      const subjectCount = new Set(tableData.map(r => r.subject)).size;
+      const monthCount = new Set(tableData.map(r => `${r.month}__${r.academicYear}`)).size;
+      const termCount = new Set(tableData.map(r => r.term)).size;
+
+      document.getElementById('statRows').textContent = totalRows;
+      document.getElementById('statSubjects').textContent = subjectCount;
+      document.getElementById('statMonths').textContent = monthCount;
+      document.getElementById('statTerms').textContent = termCount;
+
+      const maxRowsGoal = 20;
+      const progress = Math.min((totalRows / maxRowsGoal) * 100, 100);
+      document.getElementById('progressFill').style.width = progress + '%';
+      document.getElementById('progressText').textContent = Math.round(progress) + '%';
+
+      const noFilterApplied =
+        !document.getElementById('filterMonth').value &&
+        !document.getElementById('filterAcademicYear').value &&
+        !document.getElementById('filterSubject').value &&
+        !document.getElementById('filterSubTopics').value &&
+        !document.getElementById('filterPedagogy').value &&
+        !document.getElementById('filterObjectives').value &&
+        !document.getElementById('filterTerm').value &&
+        !document.getElementById('filterUnit').value;
+
+      if (!noFilterApplied) {
+        document.getElementById('statRows').textContent = `${visibleRows.length}/${totalRows}`;
+      }
+    }
+
+    function openDetailModal(label, text, month, academicYear, subject, term, unit) {
+      document.getElementById('detailBadge').textContent = label.toUpperCase();
+      document.getElementById('detailTitle').textContent = label;
+      document.getElementById('detailSub').textContent = `Full content for ${subject || 'selected row'}`;
+
+      document.getElementById('detailMeta').innerHTML = `
+        <span class="pill pill-month">${escapeHtml(month)}</span>
+        <span class="pill pill-year">${escapeHtml(academicYear)}</span>
+        <span class="pill pill-term">${escapeHtml(term)}</span>
+        <span class="pill pill-unit">${escapeHtml(unit)}</span>
+        <span class="pill" style="background:#f8fafc;color:#334155;border:1px solid #e2e8f0;">${escapeHtml(subject)}</span>
+      `;
+
+      document.getElementById('detailContent').textContent = text || 'No content available.';
+      document.getElementById('detailModal').classList.add('active');
+    }
+
+    function closeDetailModal() {
+      document.getElementById('detailModal').classList.remove('active');
+    }
+
+    function exportData() {
+      if (tableData.length === 0) {
+        alert('No data to export');
+        return;
+      }
+
+      const csv = [
+        ['Month', 'Academic Year', 'Subject', 'Sub Topics', 'Pedagogical Approach', 'Learning Objectives', 'Term', 'Unit'],
+        ...tableData.map(row => [row.month, row.academicYear, row.subject, row.subTopics, row.pedagogy, row.objectives, row.term, row.unit])
+      ]
+      .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+      .join('\n');
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'academic-planner.csv';
+      a.click();
+      window.URL.revokeObjectURL(url);
+
+      showToast('CSV exported');
+    }
+
+    function resetData() {
+      if (confirm('Are you sure you want to delete all data? This cannot be undone.')) {
+        tableData = [];
+        renderTable();
+        showToast('All data cleared');
+      }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2200);
+    }
+
+    function refreshIcons() {
+      if (window.lucide && lucide.createIcons) {
+        lucide.createIcons();
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function jsEscape(str) {
+      return String(str ?? '')
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/\n/g, "\\n")
+        .replace(/\r/g, "\\r")
+        .replace(/"/g, '&quot;');
+    }
+
+    window.addEventListener('click', function (event) {
+      const addModal = document.getElementById('addModal');
+      const detailModal = document.getElementById('detailModal');
+
+      if (event.target === addModal) closeModal();
+      if (event.target === detailModal) closeDetailModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeDetailModal();
+      }
+    });
+
+    renderTable();
+    refreshIcons();
+  </script>
+</body>
+</html>

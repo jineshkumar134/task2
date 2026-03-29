@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projection of the Annual Pedagogical Plan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Quill Editor CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff5f0 0%, #e8f2ff 100%);
+            padding: 40px 20px;
+            color: #2c3e50;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header h1 {
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            margin-top: 10px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-content {
+            padding: 50px;
+            background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b35 0%, #2563eb 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .form-section:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            margin-right: 15px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: linear-gradient(180deg, #ff6b35 0%, #2563eb 100%);
+            border-radius: 2px;
+            margin-right: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e8ecf0;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), 0 4px 15px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-input:hover {
+            border-color: #cbd5e0;
+            background: white;
+        }
+
+        /* Quill Editor Styling */
+        .editor-container {
+            background: white;
+            border: 2px solid #e8ecf0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .editor-container:hover {
+            border-color: #cbd5e0;
+        }
+
+        .editor-container.focused {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), 0 4px 15px rgba(37, 99, 235, 0.1);
+        }
+
+        .ql-toolbar {
+            background: #f8fafc;
+            border: none !important;
+            border-bottom: 1px solid #e8ecf0 !important;
+        }
+
+        .ql-container {
+            border: none !important;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            min-height: 120px;
+        }
+
+        .ql-editor {
+            min-height: 120px;
+            padding: 14px 18px;
+        }
+
+        .ql-editor.ql-blank::before {
+            color: #94a3b8;
+            font-style: normal;
+        }
+
+        .list-input-container {
+            margin-bottom: 15px;
+        }
+
+        .list-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .list-item-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e8ecf0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            background: #fafbfc;
+            transition: all 0.3s ease;
+        }
+
+        .list-item-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .btn-remove-item {
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-remove-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-add-item {
+            background: white;
+            color: #2563eb;
+            border: 2px dashed #2563eb;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-add-item:hover {
+            background: #eff6ff;
+            border-style: solid;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+        }
+
+        .data-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e8ecf0;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .table-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+        }
+
+        .table-input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .table-textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .table-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .btn-add-row {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-add-row:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-delete-row {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-delete-row:hover {
+            background: #dc2626;
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 2px solid #34d399;
+            color: #065f46;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(52, 211, 153, 0.2);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px solid #e8ecf0;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-reset {
+            background: white;
+            color: #4a5568;
+            border: 2px solid #e8ecf0;
+        }
+
+        .btn-reset:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        .preview-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .preview-content {
+            position: relative;
+            background: white;
+            margin: 3% auto;
+            padding: 50px;
+            width: 85%;
+            max-width: 900px;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .preview-actions {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .close-preview {
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-preview:hover {
+            background: #dc2626;
+            transform: rotate(90deg);
+        }
+
+        .preview-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ff6b35;
+        }
+
+        .preview-date {
+            text-align: center;
+            font-size: 13px;
+            color: #718096;
+            margin-bottom: 35px;
+        }
+
+        .preview-section-simple {
+            margin-bottom: 30px;
+        }
+
+        .preview-section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .preview-section-value {
+            font-size: 15px;
+            color: #2c3e50;
+            line-height: 1.7;
+            margin-bottom: 8px;
+            padding-left: 15px;
+        }
+
+        .preview-list {
+            padding-left: 30px;
+            margin: 10px 0;
+        }
+
+        .preview-list li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .preview-table th,
+        .preview-table td {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .preview-table th {
+            background: #f8fafc;
+            font-weight: 600;
+        }
+
+        .preview-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 768px) {
+            .form-content {
+                padding: 30px 20px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .preview-content {
+                width: 95%;
+                padding: 30px 20px;
+                margin: 10% auto;
+            }
+
+            .table-container {
+                overflow-x: scroll;
+            }
+        }
+
+        .floating-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ff6b35 0%, #2563eb 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            font-size: 14px;
+            display: none;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 20mm;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .preview-modal {
+                position: relative;
+                display: block !important;
+                background: white;
+            }
+
+            .preview-content {
+                box-shadow: none;
+                max-height: none;
+                margin: 0;
+                width: 100%;
+                padding: 0;
+                border-radius: 0;
+                overflow: visible;
+            }
+
+            .preview-actions,
+            .close-preview,
+            .floating-indicator,
+            .container,
+            .header,
+            .form-content {
+                display: none !important;
+            }
+
+            .preview-title {
+                font-size: 22px;
+                page-break-after: avoid;
+            }
+
+            .preview-section-simple {
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 PROJECTION OF THE ANNUAL PEDAGOGICAL PLAN</h1>
+            <p class="header-subtitle">Vision, Mission, Values, Goals & Strategic Planning</p>
+        </div>
+
+        <div class="form-content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                ✓ Pedagogical plan saved successfully!
+            </div>
+
+            <form id="pedagogicalForm">
+                <!-- Section 1: Vision -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">📍</div>
+                        <div class="section-title">Vision</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Vision Statement</label>
+                        <div class="editor-container" id="visionEditorContainer">
+                            <div id="visionEditor"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Mission -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">🎯</div>
+                        <div class="section-title">Mission</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mission Statement</label>
+                        <div class="editor-container" id="missionEditorContainer">
+                            <div id="missionEditor"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Our Values -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">💎</div>
+                        <div class="section-title">Our Values</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Core Values</label>
+                        <div class="list-input-container" id="valuesContainer">
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Integrity" placeholder="Enter value">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Respect" placeholder="Enter value">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Service" placeholder="Enter value">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Excellence" placeholder="Enter value">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-item" onclick="addListItem('valuesContainer')">+ Add Value</button>
+                    </div>
+                </div>
+
+                <!-- Section 4: Areas of Improvement -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">📈</div>
+                        <div class="section-title">Areas of Improvement</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Areas Needing Improvement</label>
+                        <div class="list-input-container" id="improvementContainer">
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Inclusivity" placeholder="Enter area">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Vocational Subjects" placeholder="Enter area">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Differentiated teaching" placeholder="Enter area">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-item" onclick="addListItem('improvementContainer')">+ Add Area</button>
+                    </div>
+                </div>
+
+                <!-- Section 5: Our Focus -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">🎓</div>
+                        <div class="section-title">Our Focus</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Focus Areas</label>
+                        <div class="list-input-container" id="focusContainer">
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Academic excellence" placeholder="Enter focus area">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Implementation of NEP" placeholder="Enter focus area">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Research and design thinking" placeholder="Enter focus area">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-item" onclick="addListItem('focusContainer')">+ Add Focus Area</button>
+                    </div>
+                </div>
+
+                <!-- Section 6: Pedagogical Vision -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">🌟</div>
+                        <div class="section-title">Pedagogical Vision</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Pedagogical Vision Statement</label>
+                        <div class="editor-container" id="pedVisionEditorContainer">
+                            <div id="pedVisionEditor"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 7: Teaching Learning Approach -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">📖</div>
+                        <div class="section-title">Our Teaching Learning Approach</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Teaching Learning Approach Description</label>
+                        <div class="editor-container" id="teachingApproachEditorContainer">
+                            <div id="teachingApproachEditor"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stage-wise Teaching Approaches</label>
+                        <div class="table-container">
+                            <table class="data-table" id="teachingTable">
+                                <thead>
+                                    <tr>
+                                        <th>Stage</th>
+                                        <th>Classes</th>
+                                        <th>Teaching Learning Approach</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="table-input" value="Foundation Stage" placeholder="Stage name"></td>
+                                        <td><input type="text" class="table-input" value="PS-Class II" placeholder="Classes"></td>
+                                        <td><textarea class="table-textarea" placeholder="Approach details">Play way method, Self-paced individual learning, Social group based learning</textarea></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addTeachingRow()">+ Add Stage</button>
+                    </div>
+                </div>
+
+                <!-- Section 8: Institutional Goals -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">🏆</div>
+                        <div class="section-title">Institutional Goals</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Annual Goals</label>
+                        <div class="list-input-container" id="annualGoalsContainer">
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Implementation of NEP 2020 & NCF 2022" placeholder="Enter annual goal">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Excellence in academics and co-curricular domains" placeholder="Enter annual goal">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-item" onclick="addListItem('annualGoalsContainer')">+ Add Annual Goal</button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Long Term Goals</label>
+                        <div class="list-input-container" id="longTermGoalsContainer">
+                            <div class="list-item">
+                                <input type="text" class="list-item-input" value="Infrastructure developments to create state of the art Labs, Libraries & Activity rooms" placeholder="Enter long term goal">
+                                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-item" onclick="addListItem('longTermGoalsContainer')">+ Add Long Term Goal</button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Action Plan / Strategy</label>
+                        <div class="editor-container" id="actionPlanEditorContainer">
+                            <div id="actionPlanEditor"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 9: Constitution of PPC -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">👥</div>
+                        <div class="section-title">Constitution of Pedagogical Plan Committee</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Committee Members</label>
+                        <div class="table-container">
+                            <table class="data-table" id="ppcTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Designation</th>
+                                        <th>Role in PPC</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="table-input" value="Board of Management" placeholder="Name"></td>
+                                        <td><input type="text" class="table-input" value="-" placeholder="Designation"></td>
+                                        <td><input type="text" class="table-input" value="Initiating, Planning & Guiding" placeholder="Role"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addPPCRow()">+ Add Member</button>
+                    </div>
+                </div>
+
+                <!-- Section 10: PPC Meetings -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">📅</div>
+                        <div class="section-title">PPC Meetings to Develop APP</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Meeting Details</label>
+                        <div class="table-container">
+                            <table class="data-table" id="meetingsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Date/Period</th>
+                                        <th>Stakeholders Consulted</th>
+                                        <th>Remarks</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="table-input" value="January 2024" placeholder="Date/Period"></td>
+                                        <td><textarea class="table-textarea" placeholder="List stakeholders">Academic Council, Sports Council, Principal, Vice Principal</textarea></td>
+                                        <td><textarea class="table-textarea" placeholder="Meeting remarks">Planning of the year long calendar of activities</textarea></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addMeetingRow()">+ Add Meeting</button>
+                    </div>
+                </div>
+
+                <!-- Section 11: Implementation Meetings -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">🔄</div>
+                        <div class="section-title">Number of Meetings for Implementation</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Meeting Frequency</label>
+                        <input type="text" class="form-input" id="meetingFrequency" value="ONE MEETING TO BE HELD EVERY QUARTER" placeholder="Enter meeting frequency">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Implementation Meeting Details</label>
+                        <div class="table-container">
+                            <table class="data-table" id="implMeetingsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Date/Period</th>
+                                        <th>Stakeholders</th>
+                                        <th>Remarks</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="table-input" value="Meetings Held once Fortnightly" placeholder="Date/Period"></td>
+                                        <td><textarea class="table-textarea" placeholder="Stakeholders">Academic Council, Principal, Vice Principal, HOD's</textarea></td>
+                                        <td><textarea class="table-textarea" placeholder="Remarks">Monitor the execution of pedagogical plans as per guidelines</textarea></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addImplMeetingRow()">+ Add Meeting Period</button>
+                    </div>
+                </div>
+
+                <!-- Section 12: Stakeholder Coordination -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">🤝</div>
+                        <div class="section-title">Coordination with Stakeholders</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stakeholder Engagement Plan</label>
+                        <div class="table-container">
+                            <table class="data-table" id="stakeholdersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Stakeholders</th>
+                                        <th>Methods of Communication</th>
+                                        <th>Ways of Involvement</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="table-input" value="Parents" placeholder="Stakeholder group"></td>
+                                        <td><textarea class="table-textarea" placeholder="Communication methods">School website, Whatsapp groups, PTMs, Email</textarea></td>
+                                        <td><textarea class="table-textarea" placeholder="Involvement methods">Regular PTMs, PTA Executive Body meetings, School functions</textarea></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addStakeholderRow()">+ Add Stakeholder Group</button>
+                    </div>
+                </div>
+
+                <!-- Button Group -->
+                <div class="button-group">
+                    <button type="reset" class="btn btn-reset" onclick="return confirmReset()">Reset Form</button>
+                    <button type="button" class="btn btn-secondary" onclick="showPreview()">Preview Plan</button>
+                    <button type="submit" class="btn btn-primary">Save Plan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="preview-modal">
+        <div class="preview-content">
+            <div class="preview-actions">
+                <button class="btn-print" onclick="window.print()">
+                    <span>🖨</span> Print
+                </button>
+                <button class="close-preview" onclick="closePreview()">×</button>
+            </div>
+            <div id="previewBody"></div>
+        </div>
+    </div>
+
+    <div class="floating-indicator" id="floatingIndicator">
+        💾 Auto-saving...
+    </div>
+
+    <!-- Quill Editor JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        // Initialize Quill editors
+        const editors = {};
+
+        function initializeEditor(editorId, containerId, placeholder, initialContent = '') {
+            const quill = new Quill(`#${editorId}`, {
+                theme: 'snow',
+                placeholder: placeholder,
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic', 'underline'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['clean']
+                    ]
+                }
+            });
+
+            if (initialContent) {
+                quill.root.innerHTML = initialContent;
+            }
+
+            // Focus styling
+            const container = document.getElementById(containerId);
+            quill.on('selection-change', function(range) {
+                if (range) {
+                    container.classList.add('focused');
+                } else {
+                    container.classList.remove('focused');
+                }
+            });
+
+            editors[editorId] = quill;
+            return quill;
+        }
+
+        // Initialize all editors
+        initializeEditor('visionEditor', 'visionEditorContainer', 
+            'Enter your school\'s vision statement',
+            '<p>To strive for better and better, not resting on one\'s laurels; seek solutions not excuses, deliver results and serve the community by providing quality education.</p>'
+        );
+
+        initializeEditor('missionEditor', 'missionEditorContainer',
+            'Enter your school\'s mission statement',
+            '<p>Bal Bharati Public School, Rohini run by the CES is committed to inspire students to achieve the highest standards of intellectual, social, emotional & moral development through a multi-faceted approach to education.</p><p>We promote a supportive and happy environment for students to interact with and learn from their peers, teachers, parents and the community.</p>'
+        );
+
+        initializeEditor('pedVisionEditor', 'pedVisionEditorContainer',
+            'Enter your pedagogical vision',
+            '<p>At Bal Bharati Rohini we aim to nurture the inherent potential in every child and promote quality education that focuses on the all round development of the head, hand and heart of the learners. The students will be imparted with 21st century skills so that they can act as ambassadors of Indian Culture and Global citizens.</p>'
+        );
+
+        initializeEditor('teachingApproachEditor', 'teachingApproachEditorContainer',
+            'Describe your teaching learning approach',
+            '<p>Our teaching learning approach will be in accordance with NEP promoting constructivism, collaboration, inquiry, reflection and integration.</p>'
+        );
+
+        initializeEditor('actionPlanEditor', 'actionPlanEditorContainer',
+            'Describe your action plan and strategy for achieving institutional goals',
+            '<p>Enter your comprehensive action plan and strategies here. Use bullet points (start lines with -) for listing specific actions.</p>'
+        );
+
+        // Progress tracking
+        function updateProgress() {
+            const inputs = document.querySelectorAll('.form-input, .list-item-input, .table-input, .table-textarea');
+            let filled = 0;
+            inputs.forEach(input => {
+                if (input.value.trim() !== '') filled++;
+            });
+            
+            // Count editor content
+            Object.keys(editors).forEach(key => {
+                if (editors[key].getText().trim().length > 0) filled++;
+            });
+            
+            const totalFields = inputs.length + Object.keys(editors).length;
+            const percentage = (filled / totalFields) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        document.addEventListener('input', updateProgress);
+        Object.keys(editors).forEach(key => {
+            editors[key].on('text-change', updateProgress);
+        });
+        updateProgress();
+
+        // List management
+        function addListItem(containerId) {
+            const container = document.getElementById(containerId);
+            const newItem = document.createElement('div');
+            newItem.className = 'list-item';
+            newItem.innerHTML = `
+                <input type="text" class="list-item-input" placeholder="Enter item">
+                <button type="button" class="btn-remove-item" onclick="removeListItem(this)">Remove</button>
+            `;
+            container.appendChild(newItem);
+            newItem.querySelector('.list-item-input').focus();
+            updateProgress();
+        }
+
+        function removeListItem(btn) {
+            btn.parentElement.remove();
+            updateProgress();
+        }
+
+        // Table management
+        function deleteTableRow(btn) {
+            if (confirm('Are you sure you want to delete this row?')) {
+                btn.closest('tr').remove();
+                updateProgress();
+            }
+        }
+
+        function addTeachingRow() {
+            const tbody = document.querySelector('#teachingTable tbody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Stage name"></td>
+                <td><input type="text" class="table-input" placeholder="Classes"></td>
+                <td><textarea class="table-textarea" placeholder="Approach details"></textarea></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        function addPPCRow() {
+            const tbody = document.querySelector('#ppcTable tbody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Name"></td>
+                <td><input type="text" class="table-input" placeholder="Designation"></td>
+                <td><input type="text" class="table-input" placeholder="Role"></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        function addMeetingRow() {
+            const tbody = document.querySelector('#meetingsTable tbody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Date/Period"></td>
+                <td><textarea class="table-textarea" placeholder="List stakeholders"></textarea></td>
+                <td><textarea class="table-textarea" placeholder="Meeting remarks"></textarea></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        function addImplMeetingRow() {
+            const tbody = document.querySelector('#implMeetingsTable tbody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Date/Period"></td>
+                <td><textarea class="table-textarea" placeholder="Stakeholders"></textarea></td>
+                <td><textarea class="table-textarea" placeholder="Remarks"></textarea></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        function addStakeholderRow() {
+            const tbody = document.querySelector('#stakeholdersTable tbody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Stakeholder group"></td>
+                <td><textarea class="table-textarea" placeholder="Communication methods"></textarea></td>
+                <td><textarea class="table-textarea" placeholder="Involvement methods"></textarea></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        // Preview generation
+        function showPreview() {
+            const modal = document.getElementById('previewModal');
+            const previewBody = document.getElementById('previewBody');
+            
+            const now = new Date();
+            const dateStr = now.toLocaleString('en-IN', { dateStyle: 'long', timeStyle: 'short' });
+            
+            let previewHTML = `
+                <h1 class="preview-title">PROJECTION OF THE ANNUAL PEDAGOGICAL PLAN</h1>
+                <p class="preview-date">Generated on: ${dateStr}</p>
+            `;
+            
+            // Vision
+            const visionContent = editors['visionEditor'].root.innerHTML;
+            if (visionContent && visionContent.trim() !== '<p><br></p>') {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">Vision</div>
+                        <div class="preview-section-value">${visionContent}</div>
+                    </div>
+                    <div class="preview-divider"></div>
+                `;
+            }
+            
+            // Mission
+            const missionContent = editors['missionEditor'].root.innerHTML;
+            if (missionContent && missionContent.trim() !== '<p><br></p>') {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">Mission</div>
+                        <div class="preview-section-value">${missionContent}</div>
+                    </div>
+                    <div class="preview-divider"></div>
+                `;
+            }
+            
+            // Values
+            const values = Array.from(document.querySelectorAll('#valuesContainer .list-item-input'))
+                .map(input => input.value)
+                .filter(v => v.trim());
+            if (values.length) {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">Our Values</div>
+                        <ul class="preview-list">
+                            ${values.map(v => `<li>${v}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="preview-divider"></div>
+                `;
+            }
+            
+            // Areas of Improvement
+            const improvements = Array.from(document.querySelectorAll('#improvementContainer .list-item-input'))
+                .map(input => input.value)
+                .filter(v => v.trim());
+            if (improvements.length) {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">Areas of Improvement</div>
+                        <ul class="preview-list">
+                            ${improvements.map(i => `<li>${i}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="preview-divider"></div>
+                `;
+            }
+            
+            // Focus
+            const focus = Array.from(document.querySelectorAll('#focusContainer .list-item-input'))
+                .map(input => input.value)
+                .filter(v => v.trim());
+            if (focus.length) {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">Our Focus</div>
+                        <ul class="preview-list">
+                            ${focus.map(f => `<li>${f}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="preview-divider"></div>
+                `;
+            }
+            
+            // Pedagogical Vision
+            const pedVisionContent = editors['pedVisionEditor'].root.innerHTML;
+            if (pedVisionContent && pedVisionContent.trim() !== '<p><br></p>') {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">Pedagogical Vision</div>
+                        <div class="preview-section-value">${pedVisionContent}</div>
+                    </div>
+                    <div class="preview-divider"></div>
+                `;
+            }
+            
+            // Teaching Approach
+            const teachingApproachContent = editors['teachingApproachEditor'].root.innerHTML;
+            if (teachingApproachContent && teachingApproachContent.trim() !== '<p><br></p>') {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">Our Teaching Learning Approach</div>
+                        <div class="preview-section-value">${teachingApproachContent}</div>
+                `;
+                
+                // Teaching stages table
+                const teachingRows = document.querySelectorAll('#teachingTable tbody tr');
+                if (teachingRows.length) {
+                    previewHTML += `
+                        <table class="preview-table">
+                            <thead>
+                                <tr>
+                                    <th>Stage</th>
+                                    <th>Classes</th>
+                                    <th>Teaching Learning Approach</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+                    teachingRows.forEach(row => {
+                        const cells = row.querySelectorAll('input, textarea');
+                        if (cells[0].value || cells[1].value || cells[2].value) {
+                            previewHTML += `
+                                <tr>
+                                    <td>${cells[0].value || '-'}</td>
+                                    <td>${cells[1].value || '-'}</td>
+                                    <td>${cells[2].value || '-'}</td>
+                                </tr>
+                            `;
+                        }
+                    });
+                    previewHTML += `</tbody></table>`;
+                }
+                previewHTML += `</div><div class="preview-divider"></div>`;
+            }
+            
+            // Institutional Goals
+            const annualGoals = Array.from(document.querySelectorAll('#annualGoalsContainer .list-item-input'))
+                .map(input => input.value)
+                .filter(v => v.trim());
+            const longTermGoals = Array.from(document.querySelectorAll('#longTermGoalsContainer .list-item-input'))
+                .map(input => input.value)
+                .filter(v => v.trim());
+            const actionPlanContent = editors['actionPlanEditor'].root.innerHTML;
+            
+            if (annualGoals.length || longTermGoals.length || (actionPlanContent && actionPlanContent.trim() !== '<p><br></p>')) {
+                previewHTML += `<div class="preview-section-simple">
+                    <div class="preview-section-title">Institutional Goals</div>`;
+                
+                if (annualGoals.length) {
+                    previewHTML += `
+                        <strong>Annual Goals:</strong>
+                        <ul class="preview-list">
+                            ${annualGoals.map(g => `<li>${g}</li>`).join('')}
+                        </ul>
+                    `;
+                }
+                
+                if (longTermGoals.length) {
+                    previewHTML += `
+                        <strong>Long Term Goals:</strong>
+                        <ul class="preview-list">
+                            ${longTermGoals.map(g => `<li>${g}</li>`).join('')}
+                        </ul>
+                    `;
+                }
+                
+                if (actionPlanContent && actionPlanContent.trim() !== '<p><br></p>') {
+                    previewHTML += `
+                        <strong>Action Plan / Strategy:</strong>
+                        <div class="preview-section-value">${actionPlanContent}</div>
+                    `;
+                }
+                
+                previewHTML += `</div><div class="preview-divider"></div>`;
+            }
+            
+            // PPC Table
+            const ppcRows = document.querySelectorAll('#ppcTable tbody tr');
+            if (ppcRows.length) {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">Constitution of Pedagogical Plan Committee</div>
+                        <table class="preview-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Role in PPC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                ppcRows.forEach(row => {
+                    const cells = row.querySelectorAll('input');
+                    if (cells[0].value || cells[1].value || cells[2].value) {
+                        previewHTML += `
+                            <tr>
+                                <td>${cells[0].value || '-'}</td>
+                                <td>${cells[1].value || '-'}</td>
+                                <td>${cells[2].value || '-'}</td>
+                            </tr>
+                        `;
+                    }
+                });
+                previewHTML += `</tbody></table></div><div class="preview-divider"></div>`;
+            }
+            
+            // PPC Meetings
+            const meetingRows = document.querySelectorAll('#meetingsTable tbody tr');
+            if (meetingRows.length) {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">PPC Meetings to Develop APP</div>
+                        <table class="preview-table">
+                            <thead>
+                                <tr>
+                                    <th>Date/Period</th>
+                                    <th>Stakeholders Consulted</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                meetingRows.forEach(row => {
+                    const cells = row.querySelectorAll('input, textarea');
+                    if (cells[0].value || cells[1].value || cells[2].value) {
+                        previewHTML += `
+                            <tr>
+                                <td>${cells[0].value || '-'}</td>
+                                <td>${cells[1].value || '-'}</td>
+                                <td>${cells[2].value || '-'}</td>
+                            </tr>
+                        `;
+                    }
+                });
+                previewHTML += `</tbody></table></div><div class="preview-divider"></div>`;
+            }
+            
+            // Implementation Meetings
+            const meetingFreq = document.getElementById('meetingFrequency').value;
+            const implRows = document.querySelectorAll('#implMeetingsTable tbody tr');
+            if (meetingFreq || implRows.length) {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">Number of Meetings for Implementation</div>
+                        ${meetingFreq ? `<div class="preview-section-value"><strong>Frequency:</strong> ${meetingFreq}</div>` : ''}
+                        <table class="preview-table">
+                            <thead>
+                                <tr>
+                                    <th>Date/Period</th>
+                                    <th>Stakeholders</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                implRows.forEach(row => {
+                    const cells = row.querySelectorAll('input, textarea');
+                    if (cells[0].value || cells[1].value || cells[2].value) {
+                        previewHTML += `
+                            <tr>
+                                <td>${cells[0].value || '-'}</td>
+                                <td>${cells[1].value || '-'}</td>
+                                <td>${cells[2].value || '-'}</td>
+                            </tr>
+                        `;
+                    }
+                });
+                previewHTML += `</tbody></table></div><div class="preview-divider"></div>`;
+            }
+            
+            // Stakeholders
+            const stakeholderRows = document.querySelectorAll('#stakeholdersTable tbody tr');
+            if (stakeholderRows.length) {
+                previewHTML += `
+                    <div class="preview-section-simple">
+                        <div class="preview-section-title">Coordination with Stakeholders</div>
+                        <table class="preview-table">
+                            <thead>
+                                <tr>
+                                    <th>Stakeholders</th>
+                                    <th>Methods of Communication</th>
+                                    <th>Ways of Involvement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                stakeholderRows.forEach(row => {
+                    const cells = row.querySelectorAll('input, textarea');
+                    if (cells[0].value || cells[1].value || cells[2].value) {
+                        previewHTML += `
+                            <tr>
+                                <td>${cells[0].value || '-'}</td>
+                                <td>${cells[1].value || '-'}</td>
+                                <td>${cells[2].value || '-'}</td>
+                            </tr>
+                        `;
+                    }
+                });
+                previewHTML += `</tbody></table></div>`;
+            }
+            
+            previewBody.innerHTML = previewHTML;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePreview() {
+            document.getElementById('previewModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('previewModal');
+            if (event.target === modal) {
+                closePreview();
+            }
+        }
+
+        // Form submission
+        document.getElementById('pedagogicalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 4000);
+        });
+
+        function confirmReset() {
+            return confirm('Are you sure you want to reset the entire form? All data will be lost.');
+        }
+
+        // Auto-save indicator
+        let autoSaveTimeout;
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('.form-input, .list-item-input, .table-input, .table-textarea')) {
+                clearTimeout(autoSaveTimeout);
+                const indicator = document.getElementById('floatingIndicator');
+                indicator.style.display = 'block';
+                autoSaveTimeout = setTimeout(() => {
+                    indicator.style.display = 'none';
+                }, 2000);
+            }
+        });
+
+        // Auto-save on editor change
+        Object.keys(editors).forEach(key => {
+            editors[key].on('text-change', function() {
+                clearTimeout(autoSaveTimeout);
+                const indicator = document.getElementById('floatingIndicator');
+                indicator.style.display = 'block';
+                autoSaveTimeout = setTimeout(() => {
+                    indicator.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

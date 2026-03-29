@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Reflections from Past Year - Complete</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Quill Editor CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff5f0 0%, #e8f2ff 100%);
+            padding: 40px 20px;
+            color: #2c3e50;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header h1 {
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            margin-top: 10px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-content {
+            padding: 50px;
+            background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b35 0%, #2563eb 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .form-section:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            margin-right: 15px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: linear-gradient(180deg, #ff6b35 0%, #2563eb 100%);
+            border-radius: 2px;
+            margin-right: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e8ecf0;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), 0 4px 15px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-input:hover {
+            border-color: #cbd5e0;
+            background: white;
+        }
+
+        /* Quill Editor Styling */
+        .editor-container {
+            background: white;
+            border: 2px solid #e8ecf0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .editor-container:hover {
+            border-color: #cbd5e0;
+        }
+
+        .editor-container.focused {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1), 0 4px 15px rgba(37, 99, 235, 0.1);
+        }
+
+        .ql-toolbar {
+            background: #f8fafc;
+            border: none !important;
+            border-bottom: 1px solid #e8ecf0 !important;
+        }
+
+        .ql-container {
+            border: none !important;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            min-height: 120px;
+        }
+
+        .ql-editor {
+            min-height: 120px;
+            padding: 14px 18px;
+        }
+
+        .ql-editor.ql-blank::before {
+            color: #94a3b8;
+            font-style: normal;
+        }
+
+        .enrollment-tables {
+            margin-top: 20px;
+        }
+
+        .table-section {
+            margin-bottom: 30px;
+        }
+
+        .table-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #eff6ff 0%, #fff5f0 100%);
+            border-radius: 8px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #e8ecf0;
+        }
+
+        .data-table thead {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+        }
+
+        .data-table th {
+            padding: 12px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .data-table td {
+            padding: 10px;
+            border: 1px solid #e8ecf0;
+            text-align: center;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .table-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+            text-align: center;
+        }
+
+        .table-input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .table-input.auto-calc {
+            background: #f0f9ff;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .table-textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .table-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .row-label {
+            font-weight: 600;
+            color: #4a5568;
+            text-align: left;
+            padding-left: 15px !important;
+            background: #f8fafc;
+        }
+
+        .stream-header {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%) !important;
+            color: white !important;
+            font-weight: 700;
+        }
+
+        .achievement-links {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .link-item {
+            background: #f8fafc;
+            border: 2px solid #e8ecf0;
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .link-item:hover {
+            border-color: #cbd5e0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .link-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+
+        .link-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+        }
+
+        .link-input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .calc-hint {
+            font-size: 11px;
+            color: #2563eb;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        .rating-scale-info {
+            background: linear-gradient(135deg, #eff6ff 0%, #fff5f0 100%);
+            border: 2px solid #2563eb;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .rating-scale-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .scale-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .scale-item {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #e8ecf0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scale-number {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #ff6b35 0%, #2563eb 100%);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .scale-text {
+            font-size: 13px;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .descriptor-block {
+            background: #f8fafc;
+            border: 2px solid #e8ecf0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .descriptor-block:hover {
+            border-color: #2563eb;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.1);
+        }
+
+        .descriptor-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8ecf0;
+        }
+
+        .descriptor-title-input {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            padding: 10px 15px;
+            border: 2px solid #e8ecf0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .descriptor-title-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .descriptor-badge {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 12px;
+            white-space: nowrap;
+        }
+
+        .btn-delete-descriptor {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .btn-delete-descriptor:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .actionable-item {
+            background: white;
+            border: 2px solid #e8ecf0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .actionable-item:hover {
+            border-color: #cbd5e0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .actionable-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .actionable-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .actionable-average {
+            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-left: 10px;
+            white-space: nowrap;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .rating-group {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .rating-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #e8ecf0;
+            background: white;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .rating-btn:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+            transform: scale(1.1);
+        }
+
+        .rating-btn.active {
+            background: linear-gradient(135deg, #ff6b35 0%, #2563eb 100%);
+            border-color: #ff6b35;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .subpoints-container {
+            margin-top: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #e8ecf0;
+        }
+
+        .subpoint-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e8ecf0;
+        }
+
+        .subpoint-input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+        }
+
+        .subpoint-input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .btn-remove-subpoint {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-remove-subpoint:hover {
+            background: #dc2626;
+        }
+
+        .btn-add-subpoint {
+            background: white;
+            color: #2563eb;
+            border: 2px dashed #2563eb;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-add-subpoint:hover {
+            background: #eff6ff;
+            border-style: solid;
+        }
+
+        .btn-add-actionable {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .btn-add-actionable:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-remove-actionable {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .btn-remove-actionable:hover {
+            background: #dc2626;
+        }
+
+        .btn-add-descriptor {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-add-descriptor:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .element-row {
+            background: #f8fafc !important;
+            font-weight: 600;
+        }
+
+        .subelement-row {
+            background: white;
+        }
+
+        .btn-add-row {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        .btn-add-row:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-delete-row {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-delete-row:hover {
+            background: #dc2626;
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 2px solid #34d399;
+            color: #065f46;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(52, 211, 153, 0.2);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px solid #e8ecf0;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-reset {
+            background: white;
+            color: #4a5568;
+            border: 2px solid #e8ecf0;
+        }
+
+        .btn-reset:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+            transform: translateY(-2px);
+        }
+
+        .preview-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .preview-content {
+            position: relative;
+            background: white;
+            margin: 3% auto;
+            padding: 50px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .preview-actions {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-print:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .close-preview {
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .close-preview:hover {
+            background: #dc2626;
+            transform: rotate(90deg);
+        }
+
+        .floating-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ff6b35 0%, #2563eb 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+            font-size: 14px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .form-content {
+                padding: 30px 20px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .rating-group {
+                flex-wrap: wrap;
+            }
+
+            .scale-legend {
+                grid-template-columns: 1fr;
+            }
+
+            .table-container {
+                overflow-x: scroll;
+            }
+        }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 15mm;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .preview-modal {
+                position: relative;
+                display: block !important;
+                background: white;
+            }
+
+            .preview-content {
+                box-shadow: none;
+                max-height: none;
+                margin: 0;
+                width: 100%;
+                padding: 0;
+                overflow: visible;
+            }
+
+            .preview-actions,
+            .close-preview,
+            .floating-indicator,
+            .container,
+            .header,
+            .form-content {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 REFLECTIONS FROM PAST YEAR</h1>
+            <p class="header-subtitle">Comprehensive Academic Performance & Assessment Report</p>
+        </div>
+
+        <div class="form-content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div id="successMessage" class="success-message">
+                ✓ Reflections saved successfully!
+            </div>
+
+            <form id="reflectionsForm">
+                <!-- Section 1: Number of Students on Roll -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">1</div>
+                        <div class="section-title">Number of Students on Roll (Class-wise)</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Academic Year</label>
+                        <input type="text" class="form-input" id="academicYear" value="2023-24" placeholder="Enter academic year">
+                    </div>
+                    
+                    <div class="enrollment-tables">
+                        <!-- Primary/Elementary Section -->
+                        <div class="table-section">
+                            <div class="table-section-title">Primary & Elementary Classes (Pre-School to VIII)</div>
+                            <div class="table-container">
+                                <table class="data-table" id="primaryTable">
+                                    <thead>
+                                        <tr>
+                                            <th>CLASS</th>
+                                            <th>PRE-SCHOOL &<br>PRE-PRIMARY</th>
+                                            <th>I</th>
+                                            <th>II</th>
+                                            <th>III</th>
+                                            <th>IV</th>
+                                            <th>V</th>
+                                            <th>VI</th>
+                                            <th>VII</th>
+                                            <th>VIII</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="row-label">Number of Sections</td>
+                                            <td><input type="number" class="table-input" value="13"></td>
+                                            <td><input type="number" class="table-input" value="5"></td>
+                                            <td><input type="number" class="table-input" value="5"></td>
+                                            <td><input type="number" class="table-input" value="5"></td>
+                                            <td><input type="number" class="table-input" value="5"></td>
+                                            <td><input type="number" class="table-input" value="5"></td>
+                                            <td><input type="number" class="table-input" value="5"></td>
+                                            <td><input type="number" class="table-input" value="5"></td>
+                                            <td><input type="number" class="table-input" value="5"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-label">Students on Roll</td>
+                                            <td><input type="number" class="table-input" value="451"></td>
+                                            <td><input type="number" class="table-input" value="235"></td>
+                                            <td><input type="number" class="table-input" value="229"></td>
+                                            <td><input type="number" class="table-input" value="231"></td>
+                                            <td><input type="number" class="table-input" value="229"></td>
+                                            <td><input type="number" class="table-input" value="228"></td>
+                                            <td><input type="number" class="table-input" value="227"></td>
+                                            <td><input type="number" class="table-input" value="231"></td>
+                                            <td><input type="number" class="table-input" value="228"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Senior Secondary Section -->
+                        <div class="table-section">
+                            <div class="table-section-title">Senior Secondary Classes (IX to XII) with Streams</div>
+                            <div class="table-container">
+                                <table class="data-table" id="secondaryTable">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2">CLASS</th>
+                                            <th rowspan="2">IX</th>
+                                            <th rowspan="2">X</th>
+                                            <th rowspan="2">XI</th>
+                                            <th rowspan="2">XII</th>
+                                            <th colspan="4" class="stream-header">STREAMS AND SUBJECTS IN SR. SECONDARY LEVEL</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="stream-header">SCIENCE</th>
+                                            <th class="stream-header">COMMERCE</th>
+                                            <th class="stream-header">HUMANITIES</th>
+                                            <th class="stream-header">VOCATIONAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="row-label">Number of Sections</td>
+                                            <td><input type="number" class="table-input" value="4"></td>
+                                            <td><input type="number" class="table-input" value="4"></td>
+                                            <td><input type="number" class="table-input" value="4"></td>
+                                            <td><input type="number" class="table-input" value="4"></td>
+                                            <td><input type="number" class="table-input" value="4"></td>
+                                            <td><input type="number" class="table-input" value="2"></td>
+                                            <td><input type="number" class="table-input" value="2"></td>
+                                            <td><input type="number" class="table-input" value="0"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-label">Students on Roll</td>
+                                            <td><input type="number" class="table-input" value="199"></td>
+                                            <td><input type="number" class="table-input" value="183"></td>
+                                            <td><input type="number" class="table-input" value="170"></td>
+                                            <td><input type="number" class="table-input" value="157"></td>
+                                            <td><input type="number" class="table-input" value="132"></td>
+                                            <td><input type="number" class="table-input" value="125"></td>
+                                            <td><input type="number" class="table-input" value="70"></td>
+                                            <td><input type="number" class="table-input" value="0"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: School Academic Performance -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">2</div>
+                        <div class="section-title">School Academic Performance</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Pass Percentage during the Academic Session</label>
+                        <p class="calc-hint">💡 Pass percentage will be automatically calculated when you enter appeared and passed numbers</p>
+                        <div class="table-container">
+                            <table class="data-table" id="performanceTable">
+                                <thead>
+                                    <tr>
+                                        <th>Class</th>
+                                        <th>Number of Students Appeared</th>
+                                        <th>Number of Students Passed</th>
+                                        <th>Pass Percentage (Auto)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="table-input" value="I" placeholder="Class"></td>
+                                        <td><input type="number" class="table-input perf-appeared" value="235" placeholder="Appeared" data-row="0"></td>
+                                        <td><input type="number" class="table-input perf-passed" value="235" placeholder="Passed" data-row="0"></td>
+                                        <td><input type="text" class="table-input auto-calc perf-percentage" value="100%" placeholder="Auto-calculated" readonly data-row="0"></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addPerformanceRow()">+ Add Class</button>
+                    </div>
+                </div>
+
+                <!-- Section 3: Board Examination at a Glance -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">3</div>
+                        <div class="section-title">Board Examination at a Glance</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Board Examination Results</label>
+                        <p class="calc-hint">💡 Pass percentage will be automatically calculated</p>
+                        <div class="table-container">
+                            <table class="data-table" id="boardTable">
+                                <thead>
+                                    <tr>
+                                        <th>Class</th>
+                                        <th>Students Appeared</th>
+                                        <th>Students Passed</th>
+                                        <th>Pass % (Auto)</th>
+                                        <th>91-100% Marks</th>
+                                        <th>81-90% Marks</th>
+                                        <th>Special Remarks</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="table-input" value="X" placeholder="Class"></td>
+                                        <td><input type="number" class="table-input board-appeared" value="189" placeholder="Appeared" data-row="0"></td>
+                                        <td><input type="number" class="table-input board-passed" value="188" placeholder="Passed" data-row="0"></td>
+                                        <td><input type="text" class="table-input auto-calc board-percentage" value="99.47%" placeholder="Auto-calculated" readonly data-row="0"></td>
+                                        <td><input type="text" class="table-input" value="19.05%" placeholder="91-100%"></td>
+                                        <td><input type="text" class="table-input" value="9.52%" placeholder="81-90%"></td>
+                                        <td><textarea class="table-textarea" placeholder="Remarks"></textarea></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addBoardRow()">+ Add Class</button>
+                    </div>
+                </div>
+
+                <!-- Section 4: Student Placement Detail -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">4</div>
+                        <div class="section-title">Student Placement Detail</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Number of Students Appeared in Class XII</label>
+                        <input type="number" class="form-input" id="class12Appeared" value="171" placeholder="Enter number">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Admissions in Professional Courses</label>
+                        <div class="table-container">
+                            <table class="data-table" id="placementTable">
+                                <thead>
+                                    <tr>
+                                        <th>Course/Competition</th>
+                                        <th>Number of Students Selected</th>
+                                        <th>Special Remarks</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="table-input" value="Engineering" placeholder="Course"></td>
+                                        <td><input type="number" class="table-input" value="45" placeholder="Students"></td>
+                                        <td><textarea class="table-textarea" placeholder="Remarks">Prestigious Colleges-DTU, NSIT, IGDTUW</textarea></td>
+                                        <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-add-row" onclick="addPlacementRow()">+ Add Course</button>
+                    </div>
+                </div>
+
+                <!-- Section 5: Major School Achievements -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">5</div>
+                        <div class="section-title">Major School Achievements</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Achievement Categories with Links</label>
+                        <div class="achievement-links">
+                            <div class="link-item">
+                                <div class="link-label">Academic Achievements</div>
+                                <input type="url" class="link-input" id="academicLink" placeholder="Enter Google Drive/Document link" value="">
+                            </div>
+                            <div class="link-item">
+                                <div class="link-label">Sports Achievements</div>
+                                <input type="url" class="link-input" id="sportsLink" placeholder="Enter Google Drive/Document link" value="">
+                            </div>
+                            <div class="link-item">
+                                <div class="link-label">School Accolades</div>
+                                <input type="url" class="link-input" id="accoladesLink" placeholder="Enter Google Drive/Document link" value="">
+                            </div>
+                            <div class="link-item">
+                                <div class="link-label">Co-Scholastic Achievements</div>
+                                <input type="url" class="link-input" id="coscholasticLink" placeholder="Enter Google Drive/Document link" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6: Best Practices -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">6</div>
+                        <div class="section-title">Best Practices</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Pedagogical Practices that Enhanced Learning Environment</label>
+                        <div class="editor-container" id="bestPracticesEditorContainer">
+                            <div id="bestPracticesEditor"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Best Practices Document Link (Optional)</label>
+                        <input type="url" class="form-input" id="bestPracticesLink" placeholder="Enter Google Drive/Document link">
+                    </div>
+                </div>
+
+                <!-- Section 7: Pedagogical Leadership Assessment -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">7</div>
+                        <div class="section-title">Assessment - Pedagogical Leadership</div>
+                    </div>
+
+                    <!-- Rating Scale Information -->
+                    <div class="rating-scale-info">
+                        <h3>📋 Rating Scale Guidelines</h3>
+                        <p style="font-size: 14px; color: #4a5568; margin-bottom: 15px;">
+                            Use the following rating scale to measure the current practice of the school:
+                        </p>
+                        <div class="scale-legend">
+                            <div class="scale-item">
+                                <div class="scale-number">1</div>
+                                <div class="scale-text">Never practiced</div>
+                            </div>
+                            <div class="scale-item">
+                                <div class="scale-number">2</div>
+                                <div class="scale-text">Almost never practiced</div>
+                            </div>
+                            <div class="scale-item">
+                                <div class="scale-number">3</div>
+                                <div class="scale-text">Occasionally / sometimes practiced</div>
+                            </div>
+                            <div class="scale-item">
+                                <div class="scale-number">4</div>
+                                <div class="scale-text">Frequently practiced</div>
+                            </div>
+                            <div class="scale-item">
+                                <div class="scale-number">5</div>
+                                <div class="scale-text">Practice is fully embedded</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="descriptorsContainer">
+                        <!-- Descriptors will be dynamically added here -->
+                    </div>
+
+                    <button type="button" class="btn-add-descriptor" onclick="addDescriptor()">
+                        + Add New Descriptor
+                    </button>
+                </div>
+
+                <!-- Section 8: Insights after assessing the Actionables -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">8</div>
+                        <div class="section-title">Insights after assessing the Actionables</div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="insightsTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%;">Descriptor</th>
+                                    <th style="width: 15%;">Average Rating</th>
+                                    <th>Key Insights</th>
+                                    <th style="width: 10%;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="table-input" placeholder="Descriptor name"></td>
+                                    <td><input type="text" class="table-input" placeholder="Rating"></td>
+                                    <td><textarea class="table-textarea" placeholder="Enter key insights"></textarea></td>
+                                    <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn-add-row" onclick="addInsightsRow()">+ Add Descriptor</button>
+                </div>
+
+                <!-- Section 9: Whole School Rubrics -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <div class="section-icon">9</div>
+                        <div class="section-title">Whole School Rubrics</div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="rubricsTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 15%;">ELEMENTS</th>
+                                    <th>LEVEL 1</th>
+                                    <th>LEVEL 2</th>
+                                    <th>LEVEL 3</th>
+                                    <th>LEVEL 4</th>
+                                    <th style="width: 8%;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Example structure -->
+                                <tr class="element-row">
+                                    <td><input type="text" class="table-input" value="TEACHING & LEARNING" placeholder="Element name"></td>
+                                    <td><textarea class="table-textarea" placeholder="Level 1 description">Knowledge and understanding of how students learn is demonstrated by a minority of teachers</textarea></td>
+                                    <td><textarea class="table-textarea" placeholder="Level 2 description">Knowledge and understanding of how students learn is emergent in teacher practice. Individual and/or teams of teachers are planning new approaches to teaching and learning.</textarea></td>
+                                    <td><textarea class="table-textarea" placeholder="Level 3 description">Knowledge and understanding of how students learn is demonstrated by most teachers. Most teachers have developed and implemented practices that put students at the centre of the learning process.</textarea></td>
+                                    <td><textarea class="table-textarea" placeholder="Level 4 description">Knowledge and understanding of how students learn is evident in the practice of all teachers through a broad repertoire of student-centred teaching strategies and assessment methods</textarea></td>
+                                    <td><button type="button" class="btn-delete-row" onclick="deleteRubricsRow(this)">Delete</button></td>
+                                </tr>
+                                <tr class="subelement-row">
+                                    <td style="padding-left: 25px;"><input type="text" class="table-input" value="Personalized Learning" placeholder="Sub-element name"></td>
+                                    <td><textarea class="table-textarea" placeholder="Level 1 description">Initial work is being undertaken to gather data on the individual</textarea></td>
+                                    <td><textarea class="table-textarea" placeholder="Level 2 description">Data on the individual learning styles of students has been used to inform planning for the way in which teaching practices</textarea></td>
+                                    <td><textarea class="table-textarea" placeholder="Level 3 description">Pedagogical practice is informed by data and aligned to the learning needs and goals of individual students at</textarea></td>
+                                    <td><textarea class="table-textarea" placeholder="Level 4 description">Pedagogical practice is aligned to the learning needs and goals of individual students across the whole school</textarea></td>
+                                    <td><button type="button" class="btn-delete-row" onclick="deleteRubricsRow(this)">Delete</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn-add-row" onclick="addRubricsElement()">+ Add Element</button>
+                    <button type="button" class="btn-add-row" onclick="addRubricsSubElement()">+ Add Sub-element</button>
+                </div>
+
+                <!-- Button Group -->
+                <div class="button-group">
+                    <button type="reset" class="btn btn-reset" onclick="return confirmReset()">Reset Form</button>
+                    <button type="button" class="btn btn-secondary" onclick="showPreview()">Preview Report</button>
+                    <button type="submit" class="btn btn-primary">Save Report</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="preview-modal">
+        <div class="preview-content">
+            <div class="preview-actions">
+                <button class="btn-print" onclick="window.print()">🖨 Print</button>
+                <button class="close-preview" onclick="closePreview()">×</button>
+            </div>
+            <div id="previewBody"></div>
+        </div>
+    </div>
+
+    <div class="floating-indicator" id="floatingIndicator">💾 Auto-saving...</div>
+
+    <!-- Quill Editor JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        // Initialize Quill editor
+        const editors = {};
+
+        function initializeEditor(editorId, containerId, placeholder) {
+            const quill = new Quill(`#${editorId}`, {
+                theme: 'snow',
+                placeholder: placeholder,
+                modules: {
+                    toolbar: [
+                        ['bold', 'italic', 'underline'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['clean']
+                    ]
+                }
+            });
+
+            const container = document.getElementById(containerId);
+            quill.on('selection-change', function(range) {
+                if (range) {
+                    container.classList.add('focused');
+                } else {
+                    container.classList.remove('focused');
+                }
+            });
+
+            editors[editorId] = quill;
+            return quill;
+        }
+
+        initializeEditor('bestPracticesEditor', 'bestPracticesEditorContainer', 
+            'Describe pedagogical practices that enhanced the learning environment'
+        );
+
+        // Descriptor management
+        let descriptorCounter = 0;
+        let subpointIdCounter = 0;
+
+        const defaultDescriptors = [
+            {
+                title: "ENGAGE WITH TEACHERS PROFESSIONAL DEVELOPMENT",
+                actionables: [
+                    "Ascertain the needs for professional development through collaborative practises",
+                    "Creating opportunities for continuous and comprehensive professional learning",
+                    "Promoting reflective thinking and meta cognitive thinking practices amongst the teachers",
+                    "Empowering teachers to become agents of change"
+                ]
+            },
+            {
+                title: "INITIATING INNOVATIONS IN SCHOOLS",
+                actionables: [
+                    "Creating a Culture of Innovation",
+                    "Expand the perspectives of teachers to implement innovative pedagogies",
+                    "Opportunities for student learning and innovation"
+                ]
+            },
+            {
+                title: "LEADING THE TEACHING-LEARNING PROCESS",
+                actionables: [
+                    "Developing a shared understanding of Teaching-Learning",
+                    "Create a conducive environment for learning",
+                    "Encourage teachers to become reflective practitioners",
+                    "Build teacher competency in using data to improve Teaching Learning Process"
+                ]
+            },
+            {
+                title: "DEVELOPING A LEARNING CULTURE",
+                actionables: [
+                    "Creating the 'social glue' by building a culture of trust and self-improvement",
+                    "Developing policies and systems that support a culture of learning by including all stakeholders",
+                    "Keeping students at the heart of the learning culture",
+                    "Encouraging teachers to deepen learning",
+                    "Parents as active partners in the educational journey of their child"
+                ]
+            },
+            {
+                title: "BUILDING AN INCLUSIVE CULTURE",
+                actionables: [
+                    "Creating an environment of acceptance",
+                    "Formulating inclusive policies and structures",
+                    "Adopting Inclusive teaching practices",
+                    "Supporting student learning"
+                ]
+            }
+        ];
+
+        window.addEventListener('DOMContentLoaded', function() {
+            defaultDescriptors.forEach(descriptor => {
+                addDescriptor(descriptor.title, descriptor.actionables);
+            });
+        });
+
+        function addDescriptor(title = "", actionables = []) {
+            descriptorCounter++;
+            const container = document.getElementById('descriptorsContainer');
+            const descriptorId = `descriptor-${descriptorCounter}`;
+            
+            const descriptorBlock = document.createElement('div');
+            descriptorBlock.className = 'descriptor-block';
+            descriptorBlock.id = descriptorId;
+            
+            let actionablesHTML = '';
+            if (actionables.length === 0) {
+                actionables = ["New actionable"];
+            }
+            
+            actionables.forEach((actionableText, index) => {
+                const actionableId = `${descriptorId}-actionable-${index + 1}`;
+                actionablesHTML += `
+                    <div class="actionable-item" data-actionable-id="${actionableId}">
+                        <div class="actionable-header">
+                            <div class="actionable-text">
+                                Actionable ${index + 1}: ${actionableText}
+                            </div>
+                            <div class="actionable-average" id="avg-${actionableId}">
+                                Average: N/A
+                            </div>
+                            <button type="button" class="btn-remove-actionable" onclick="removeActionable(this)">Remove</button>
+                        </div>
+                        <div class="subpoints-container" id="subpoints-${actionableId}">
+                            <div class="subpoint-item" data-subpoint-id="subpoint-${subpointIdCounter++}">
+                                <input type="text" class="subpoint-input" placeholder="Enter sub-point">
+                                <div class="rating-group">
+                                    <button type="button" class="rating-btn" data-rating="1">1</button>
+                                    <button type="button" class="rating-btn" data-rating="2">2</button>
+                                    <button type="button" class="rating-btn" data-rating="3">3</button>
+                                    <button type="button" class="rating-btn" data-rating="4">4</button>
+                                    <button type="button" class="rating-btn" data-rating="5">5</button>
+                                </div>
+                                <button type="button" class="btn-remove-subpoint" onclick="removeSubpoint(this)">Remove</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-add-subpoint" onclick="addSubpoint('subpoints-${actionableId}')">+ Add Sub-point</button>
+                    </div>
+                `;
+            });
+            
+            descriptorBlock.innerHTML = `
+                <div class="descriptor-header">
+                    <span class="descriptor-badge">Descriptor ${descriptorCounter}</span>
+                    <input type="text" class="descriptor-title-input" value="${title}" placeholder="Enter descriptor title">
+                    <button type="button" class="btn-delete-descriptor" onclick="deleteDescriptor('${descriptorId}')">Delete Descriptor</button>
+                </div>
+                <div id="actionables-${descriptorId}">
+                    ${actionablesHTML}
+                </div>
+                <button type="button" class="btn-add-actionable" onclick="addActionable('${descriptorId}')">+ Add Actionable</button>
+            `;
+            
+            container.appendChild(descriptorBlock);
+        }
+
+        function deleteDescriptor(descriptorId) {
+            if (confirm('Are you sure you want to delete this entire descriptor and all its actionables?')) {
+                document.getElementById(descriptorId).remove();
+            }
+        }
+
+        function addActionable(descriptorId) {
+            const container = document.getElementById(`actionables-${descriptorId}`);
+            const actionableCount = container.querySelectorAll('.actionable-item').length + 1;
+            const actionableId = `${descriptorId}-actionable-${actionableCount}`;
+            
+            const actionableItem = document.createElement('div');
+            actionableItem.className = 'actionable-item';
+            actionableItem.setAttribute('data-actionable-id', actionableId);
+            actionableItem.innerHTML = `
+                <div class="actionable-header">
+                    <div class="actionable-text">
+                        Actionable ${actionableCount}: New actionable
+                    </div>
+                    <div class="actionable-average" id="avg-${actionableId}">
+                        Average: N/A
+                    </div>
+                    <button type="button" class="btn-remove-actionable" onclick="removeActionable(this)">Remove</button>
+                </div>
+                <div class="subpoints-container" id="subpoints-${actionableId}">
+                    <div class="subpoint-item" data-subpoint-id="subpoint-${subpointIdCounter++}">
+                        <input type="text" class="subpoint-input" placeholder="Enter sub-point">
+                        <div class="rating-group">
+                            <button type="button" class="rating-btn" data-rating="1">1</button>
+                            <button type="button" class="rating-btn" data-rating="2">2</button>
+                            <button type="button" class="rating-btn" data-rating="3">3</button>
+                            <button type="button" class="rating-btn" data-rating="4">4</button>
+                            <button type="button" class="rating-btn" data-rating="5">5</button>
+                        </div>
+                        <button type="button" class="btn-remove-subpoint" onclick="removeSubpoint(this)">Remove</button>
+                    </div>
+                </div>
+                <button type="button" class="btn-add-subpoint" onclick="addSubpoint('subpoints-${actionableId}')">+ Add Sub-point</button>
+            `;
+            
+            container.appendChild(actionableItem);
+        }
+
+        function removeActionable(btn) {
+            if (confirm('Are you sure you want to remove this actionable?')) {
+                btn.closest('.actionable-item').remove();
+            }
+        }
+
+        // Rating button functionality and average calculation
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('rating-btn')) {
+                const group = e.target.parentElement;
+                group.querySelectorAll('.rating-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                const actionableItem = e.target.closest('.actionable-item');
+                if (actionableItem) {
+                    calculateActionableAverage(actionableItem);
+                }
+                
+                updateProgress();
+            }
+        });
+
+        function calculateActionableAverage(actionableItem) {
+            const actionableId = actionableItem.getAttribute('data-actionable-id');
+            const subpoints = actionableItem.querySelectorAll('.subpoint-item');
+            let totalRating = 0;
+            let ratedCount = 0;
+            
+            subpoints.forEach(subpoint => {
+                const activeBtn = subpoint.querySelector('.rating-btn.active');
+                if (activeBtn) {
+                    totalRating += parseInt(activeBtn.getAttribute('data-rating'));
+                    ratedCount++;
+                }
+            });
+            
+            const avgElement = document.getElementById(`avg-${actionableId}`);
+            if (avgElement) {
+                if (ratedCount > 0) {
+                    const average = (totalRating / ratedCount).toFixed(2);
+                    avgElement.textContent = `Average: ${average}`;
+                } else {
+                    avgElement.textContent = 'Average: N/A';
+                }
+            }
+        }
+
+        function addSubpoint(containerId) {
+            const container = document.getElementById(containerId);
+            const newItem = document.createElement('div');
+            newItem.className = 'subpoint-item';
+            newItem.setAttribute('data-subpoint-id', `subpoint-${subpointIdCounter++}`);
+            newItem.innerHTML = `
+                <input type="text" class="subpoint-input" placeholder="Enter sub-point">
+                <div class="rating-group">
+                    <button type="button" class="rating-btn" data-rating="1">1</button>
+                    <button type="button" class="rating-btn" data-rating="2">2</button>
+                    <button type="button" class="rating-btn" data-rating="3">3</button>
+                    <button type="button" class="rating-btn" data-rating="4">4</button>
+                    <button type="button" class="rating-btn" data-rating="5">5</button>
+                </div>
+                <button type="button" class="btn-remove-subpoint" onclick="removeSubpoint(this)">Remove</button>
+            `;
+            container.appendChild(newItem);
+        }
+
+        function removeSubpoint(btn) {
+            const actionableItem = btn.closest('.actionable-item');
+            btn.parentElement.remove();
+            if (actionableItem) {
+                calculateActionableAverage(actionableItem);
+            }
+        }
+
+        // Automatic percentage calculation functions
+        function calculatePerformancePercentage(row) {
+            const appeared = parseFloat(document.querySelector(`.perf-appeared[data-row="${row}"]`)?.value) || 0;
+            const passed = parseFloat(document.querySelector(`.perf-passed[data-row="${row}"]`)?.value) || 0;
+            const percentageField = document.querySelector(`.perf-percentage[data-row="${row}"]`);
+            
+            if (appeared > 0 && percentageField) {
+                const percentage = ((passed / appeared) * 100).toFixed(2);
+                percentageField.value = percentage + '%';
+            }
+        }
+
+        function calculateBoardPercentage(row) {
+            const appeared = parseFloat(document.querySelector(`.board-appeared[data-row="${row}"]`)?.value) || 0;
+            const passed = parseFloat(document.querySelector(`.board-passed[data-row="${row}"]`)?.value) || 0;
+            const percentageField = document.querySelector(`.board-percentage[data-row="${row}"]`);
+            
+            if (appeared > 0 && percentageField) {
+                const percentage = ((passed / appeared) * 100).toFixed(2);
+                percentageField.value = percentage + '%';
+            }
+        }
+
+        // Event listeners for automatic calculations
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('perf-appeared') || e.target.classList.contains('perf-passed')) {
+                const row = e.target.dataset.row;
+                calculatePerformancePercentage(row);
+            }
+            
+            if (e.target.classList.contains('board-appeared') || e.target.classList.contains('board-passed')) {
+                const row = e.target.dataset.row;
+                calculateBoardPercentage(row);
+            }
+        });
+
+        // Table management functions
+        function deleteTableRow(btn) {
+            if (confirm('Are you sure you want to delete this row?')) {
+                btn.closest('tr').remove();
+                updateProgress();
+            }
+        }
+
+        function deleteRubricsRow(btn) {
+            if (confirm('Are you sure you want to delete this row?')) {
+                btn.closest('tr').remove();
+            }
+        }
+
+        let perfRowCounter = 1;
+        function addPerformanceRow() {
+            const tbody = document.querySelector('#performanceTable tbody');
+            const newRow = tbody.insertRow();
+            const rowId = perfRowCounter++;
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Class"></td>
+                <td><input type="number" class="table-input perf-appeared" placeholder="Appeared" data-row="${rowId}"></td>
+                <td><input type="number" class="table-input perf-passed" placeholder="Passed" data-row="${rowId}"></td>
+                <td><input type="text" class="table-input auto-calc perf-percentage" placeholder="Auto-calculated" readonly data-row="${rowId}"></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        let boardRowCounter = 1;
+        function addBoardRow() {
+            const tbody = document.querySelector('#boardTable tbody');
+            const newRow = tbody.insertRow();
+            const rowId = boardRowCounter++;
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Class"></td>
+                <td><input type="number" class="table-input board-appeared" placeholder="Appeared" data-row="${rowId}"></td>
+                <td><input type="number" class="table-input board-passed" placeholder="Passed" data-row="${rowId}"></td>
+                <td><input type="text" class="table-input auto-calc board-percentage" placeholder="Auto-calculated" readonly data-row="${rowId}"></td>
+                <td><input type="text" class="table-input" placeholder="91-100%"></td>
+                <td><input type="text" class="table-input" placeholder="81-90%"></td>
+                <td><textarea class="table-textarea" placeholder="Remarks"></textarea></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        function addPlacementRow() {
+            const tbody = document.querySelector('#placementTable tbody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Course"></td>
+                <td><input type="number" class="table-input" placeholder="Students"></td>
+                <td><textarea class="table-textarea" placeholder="Remarks"></textarea></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+            updateProgress();
+        }
+
+        function addInsightsRow() {
+            const tbody = document.querySelector('#insightsTable tbody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Descriptor name"></td>
+                <td><input type="text" class="table-input" placeholder="Rating"></td>
+                <td><textarea class="table-textarea" placeholder="Enter key insights"></textarea></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteTableRow(this)">Delete</button></td>
+            `;
+        }
+
+        function addRubricsElement() {
+            const tbody = document.querySelector('#rubricsTable tbody');
+            const newRow = tbody.insertRow();
+            newRow.className = 'element-row';
+            newRow.innerHTML = `
+                <td><input type="text" class="table-input" placeholder="Element name"></td>
+                <td><textarea class="table-textarea" placeholder="Level 1 description"></textarea></td>
+                <td><textarea class="table-textarea" placeholder="Level 2 description"></textarea></td>
+                <td><textarea class="table-textarea" placeholder="Level 3 description"></textarea></td>
+                <td><textarea class="table-textarea" placeholder="Level 4 description"></textarea></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteRubricsRow(this)">Delete</button></td>
+            `;
+        }
+
+        function addRubricsSubElement() {
+            const tbody = document.querySelector('#rubricsTable tbody');
+            const newRow = tbody.insertRow();
+            newRow.className = 'subelement-row';
+            newRow.innerHTML = `
+                <td style="padding-left: 25px;"><input type="text" class="table-input" placeholder="Sub-element name"></td>
+                <td><textarea class="table-textarea" placeholder="Level 1 description"></textarea></td>
+                <td><textarea class="table-textarea" placeholder="Level 2 description"></textarea></td>
+                <td><textarea class="table-textarea" placeholder="Level 3 description"></textarea></td>
+                <td><textarea class="table-textarea" placeholder="Level 4 description"></textarea></td>
+                <td><button type="button" class="btn-delete-row" onclick="deleteRubricsRow(this)">Delete</button></td>
+            `;
+        }
+
+        // Preview functionality
+        function showPreview() {
+            const modal = document.getElementById('previewModal');
+            const previewBody = document.getElementById('previewBody');
+            
+            let previewHTML = '<h1 style="text-align:center;color:#2c3e50;margin-bottom:30px;">REFLECTIONS FROM PAST YEAR</h1>';
+            previewHTML += '<p style="text-align:center;color:#64748b;margin-bottom:40px;">Complete Assessment Report</p>';
+            
+            previewBody.innerHTML = previewHTML;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePreview() {
+            document.getElementById('previewModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('previewModal');
+            if (event.target === modal) closePreview();
+        }
+
+        // Form submission
+        document.getElementById('reflectionsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const successMsg = document.getElementById('successMessage');
+            successMsg.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 4000);
+        });
+
+        function confirmReset() {
+            return confirm('Are you sure you want to reset the entire form? All data will be lost.');
+        }
+
+        // Auto-save indicator
+        let autoSaveTimeout;
+        document.addEventListener('input', function(e) {
+            clearTimeout(autoSaveTimeout);
+            const indicator = document.getElementById('floatingIndicator');
+            indicator.style.display = 'block';
+            autoSaveTimeout = setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 2000);
+        });
+
+        // Progress tracking
+        function updateProgress() {
+            const inputs = document.querySelectorAll('.form-input:not(.auto-calc), .table-input:not(.auto-calc), .table-textarea, .link-input');
+            const activeRatings = document.querySelectorAll('.rating-btn.active').length;
+            const totalSubpoints = document.querySelectorAll('.subpoint-item').length;
+            
+            let filled = activeRatings; // Count ratings
+            inputs.forEach(input => {
+                if (input.value.trim() !== '') filled++;
+            });
+            
+            Object.keys(editors).forEach(key => {
+                if (editors[key].getText().trim().length > 0) filled++;
+            });
+            
+            const totalFields = inputs.length + totalSubpoints + Object.keys(editors).length;
+            const percentage = totalFields > 0 ? (filled / totalFields) * 100 : 0;
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        // Initialize calculations on load
+        calculatePerformancePercentage(0);
+        calculateBoardPercentage(0);
+        updateProgress();
+    </script>
+</body>
+</html>
