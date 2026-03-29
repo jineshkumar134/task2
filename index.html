@@ -163,13 +163,17 @@
 
     <div class="container mx-auto px-6 py-12">
         <!-- Header -->
-        <header class="text-center mb-20 animate-in fade-in slide-in-from-top-4 duration-1000">
+        <header class="text-center mb-16 animate-in fade-in slide-in-from-top-4 duration-1000">
             <h1 class="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
                 Educational <span class="gradient-text">Management Suite</span>
             </h1>
-            <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
                 A high-performance comprehensive ecosystem for curriculum planning, tracking, and analytics.
             </p>
+            <button onclick="openExportModal()" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-2xl font-bold text-lg shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-all transform hover:-translate-y-1 flex items-center mx-auto focus:outline-none">
+                <i data-lucide="printer" class="w-5 h-5 mr-3"></i>
+                Preview & Export PDF
+            </button>
         </header>
 
         <!-- Main List Area -->
@@ -307,9 +311,205 @@
         </footer>
     </div>
 
+    <!-- Export Modal -->
+    <div id="exportModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="glass-panel p-8 rounded-3xl w-full max-w-lg shadow-2xl transform scale-95 transition-transform duration-300 border border-slate-700/50" id="exportModalContent">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold flex items-center">
+                    <i data-lucide="file-down" class="text-blue-400 w-6 h-6 mr-3"></i>
+                    Export Sections
+                </h2>
+                <button onclick="closeExportModal()" class="text-slate-400 hover:text-white transition-colors focus:outline-none">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <p class="text-slate-400 text-sm mb-6">Select the departments you wish to export as a single combined PDF.</p>
+
+            <div class="mb-4 pb-4 border-b border-slate-700/50">
+                <label class="flex items-center space-x-3 cursor-pointer group">
+                    <input type="checkbox" id="selectAllCheckbox" onchange="toggleAllSections(this)" class="w-5 h-5 rounded border-slate-600 bg-slate-800 text-blue-500 focus:ring-blue-500 focus:ring-offset-slate-900 border-2">
+                    <span class="font-semibold text-slate-200 group-hover:text-white transition-colors">Select All Sections</span>
+                </label>
+            </div>
+
+            <div class="space-y-3 max-h-60 overflow-y-auto pr-2 custom-scrollbar" id="exportChecklist">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="mt-8 flex justify-end gap-4">
+                <button onclick="closeExportModal()" class="px-5 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white transition-colors font-medium">Cancel</button>
+                <button onclick="generatePreviewPDF()" id="generatePdfBtn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-500/20 px-6 disabled:opacity-50 disabled:cursor-not-allowed flex items-center">
+                    Generate PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
+
+        // Export Modal Configuration
+        const exportSections = [
+            { id: '1', file: 'schoolinfo.html', title: '1. School Info' },
+            { id: '2', file: 'projection.html', title: '2. Projection Plan' },
+            { id: '3', file: 'reflection.html', title: '3. Reflections' },
+            { id: '4', file: 'planofcurrentacademic.html', title: '4. Current Academic Plan' },
+            { id: '5', file: 'fln.html', title: '5. FLN & Rituals' },
+            { id: '6', file: 'academicyearcal.html', title: '6. Yearly Calendar' },
+            { id: '7', file: 'studentdeveplplan.html', title: '7. Student Dev Plan' },
+            { id: '8', file: 'teacherdev.html', title: '8. Teacher Dev Plan' },
+            { id: '9', file: 'actionable.html', title: '9. Actionable 6 Steps' },
+            { id: '10', file: 'descriptionwithrating.html', title: '10. Descriptors & Ratings' }
+        ];
+
+        // Populate Checkbox list
+        const checklistEl = document.getElementById('exportChecklist');
+        exportSections.forEach(section => {
+            const label = document.createElement('label');
+            label.className = 'flex items-center space-x-3 cursor-pointer group p-2 hover:bg-slate-800/50 rounded-lg transition-colors';
+            label.innerHTML = `
+                <input type="checkbox" value="${section.file}" class="export-checkbox w-4 h-4 rounded border-slate-600 bg-slate-800 text-blue-500 focus:ring-blue-500 focus:ring-offset-slate-900 border-2" onchange="updateSelectAllState()">
+                <span class="text-slate-300 group-hover:text-white transition-colors">${section.title}</span>
+            `;
+            checklistEl.appendChild(label);
+        });
+
+        function openExportModal() {
+            const modal = document.getElementById('exportModal');
+            const content = document.getElementById('exportModalContent');
+            modal.classList.remove('hidden');
+            // small delay for transition
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            });
+        }
+
+        function closeExportModal() {
+            const modal = document.getElementById('exportModal');
+            const content = document.getElementById('exportModalContent');
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function toggleAllSections(source) {
+            const checkboxes = document.querySelectorAll('.export-checkbox');
+            checkboxes.forEach(cb => cb.checked = source.checked);
+        }
+
+        function updateSelectAllState() {
+            const checkboxes = document.querySelectorAll('.export-checkbox');
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            document.getElementById('selectAllCheckbox').checked = allChecked;
+        }
+
+        async function generatePreviewPDF() {
+            const btn = document.getElementById('generatePdfBtn');
+            const selected = Array.from(document.querySelectorAll('.export-checkbox:checked')).map(cb => cb.value);
+            
+            if (selected.length === 0) {
+                alert('Please select at least one department section to export.');
+                return;
+            }
+
+            btn.innerHTML = 'Generating...';
+            btn.disabled = true;
+
+            try {
+                const combinedHTMLChunks = [];
+                for (const fileUrl of selected) {
+                    const res = await fetch(fileUrl);
+                    if (!res.ok) continue;
+                    const text = await res.text();
+                    
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+                    
+                    // Extract the main container or body contents
+                    const container = doc.querySelector('.container') || doc.body;
+                    
+                    // Clean up UI buttons from printable view
+                    const elementsToRemove = container.querySelectorAll('button, .floating-indicator, .preview-actions, nav, header');
+                    elementsToRemove.forEach(el => el.remove());
+
+                    // Force text to black for better PDF printing
+                    const textElements = container.querySelectorAll('.text-slate-400, .text-slate-300, .text-white, .text-slate-100');
+                    textElements.forEach(el => {
+                        el.style.color = '#000';
+                    });
+                    
+                    combinedHTMLChunks.push(`<div style="page-break-after: always; padding: 20px; color: black; background: white;">${container.innerHTML}</div>`);
+                }
+
+                // Create hidden iframe for printing
+                let printFrame = document.getElementById('printFrame');
+                if (!printFrame) {
+                    printFrame = document.createElement('iframe');
+                    printFrame.id = 'printFrame';
+                    printFrame.style.position = 'fixed';
+                    printFrame.style.right = '0';
+                    printFrame.style.bottom = '0';
+                    printFrame.style.width = '0';
+                    printFrame.style.height = '0';
+                    printFrame.style.border = '0';
+                    document.body.appendChild(printFrame);
+                }
+
+                const iframeDoc = printFrame.contentWindow.document;
+                iframeDoc.open();
+                iframeDoc.write(`
+                    <!DOCTYPE html>
+                    <html>
+                        <head>
+                            <title>Educational Management Suite - Export</title>
+                            <!-- Tailwind CSS via CDN for styling the printed HTML -->
+                            <script src="https://cdn.tailwindcss.com"><\/script>
+                            <!-- Include Lucide icons just in case -->
+                            <script src="https://unpkg.com/lucide@latest"><\/script>
+                            <style>
+                                @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+                                body { 
+                                    font-family: 'Poppins', sans-serif;
+                                    background: white !important; 
+                                    color: black !important;
+                                }
+                                h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; color: black !important; }
+                                input, textarea { border: 1px solid #ccc !important; color: black !important; background: transparent !important; }
+                                .glass-panel, .form-section { background: white !important; box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+                                @media print {
+                                    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+                                }
+                            </style>
+                        </head>
+                        <body class="bg-white text-black p-8">
+                            ${combinedHTMLChunks.join('')}
+                            <script>
+                                setTimeout(() => {
+                                    if(typeof lucide !== 'undefined') lucide.createIcons();
+                                    setTimeout(() => {
+                                        window.print();
+                                    }, 500);
+                                }, 1000);
+                            <\/script>
+                        </body>
+                    </html>
+                `);
+                iframeDoc.close();
+                
+            } catch (err) {
+                console.error("PDF Export failed:", err);
+                alert("An error occurred while generating PDF. Please check your connection and try again.");
+            } finally {
+                btn.innerHTML = 'Generate PDF';
+                btn.disabled = false;
+                closeExportModal();
+            }
+        }
     </script>
 </body>
 </html>
